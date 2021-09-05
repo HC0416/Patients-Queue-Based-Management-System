@@ -49,5 +49,5 @@ struct history_node* hRoot = NULL;
 
 int main()
 {
-
+ cout << "hello";
 }
