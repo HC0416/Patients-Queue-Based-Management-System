@@ -104,6 +104,7 @@ public:
         int age, zip, date, month, year, hour, minute, choice1, choice2;
         bool disab_option;
 
+        cin.ignore();
         cout << "Please enter the information below" << endl << "Patient ID : ";
         getline(cin, id);
         cout << "Patient first name : ";
