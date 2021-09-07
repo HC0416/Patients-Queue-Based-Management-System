@@ -449,39 +449,6 @@ public:
 class doctors {
 public:
 
-    void searchPatientByID()
-    {
-        string id;
-
-        hCurrent = hHead;
-        cout << "\n\tPlease Enter The Patient's ID: ";
-        cin >> id;
-
-        while (hCurrent != NULL)
-        {
-            if (hCurrent->info.id == id)
-            {
-                cout << "\n\t================================== PATIENT'S INFO ==================================\n";
-                cout << "\tPatient ID        : " << hCurrent->info.id << endl;
-                cout << "\tName              : " << hCurrent->info.first_name << " " << hCurrent->info.last_name << endl;
-                cout << "\tAge               : " << hCurrent->info.age << endl;
-                cout << "\tGender            : " << hCurrent->info.gender << endl;
-                cout << "\tPhone Number      : " << hCurrent->info.phone << endl;
-                cout << "\tAddress           : " << hCurrent->info.pAddress.addressNo << ", " << hCurrent->info.pAddress.buildingStreet << ", " << hCurrent->info.pAddress.city << ", " << hCurrent->info.pAddress.zip << ", " << hCurrent->info.pAddress.state << ", " << hCurrent->info.pAddress.country << endl;
-                cout << "\tDisability        : " << hCurrent->disab_option << endl;
-                cout << "\tCurrent date time : " << hCurrent->dateTime.year << "-" << hCurrent->dateTime.month << "-" << hCurrent->dateTime.date << " " << hCurrent->dateTime.hour << ":" << hCurrent->dateTime.minute << endl;
-                cout << "\t====================================================================================\n\n";
-                break;
-            }
-            else
-            {
-                hCurrent = hCurrent->next;
-            }
-        }
-
-        if (hCurrent == NULL)
-            cout << "\n\tThe Patient ID is not existed!\n";
-    }
 };
 
 class Design {
@@ -607,7 +574,7 @@ void doctorMenuPage()
             break;
         case 2:
             system("cls");
-            doctor.searchPatientByID();
+            cout << "soon";
             system("pause");
             break;
         case 3:
