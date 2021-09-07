@@ -343,6 +343,7 @@ public:
         displayArray(nodeArrPtr, length);
     }
 
+    //for 1.5 to search by ID
     void searchPatientById()
     {
         string id;
@@ -378,6 +379,7 @@ public:
             cout << "\n\tThe Patient ID is not existed!\n";
     }
 
+    //for 1.5 to search by name
     void searchPatientByFname()
     {
         string fName;
@@ -413,6 +415,7 @@ public:
             cout << "\n\tThe Patient's First Name is not existed!\n";
     }
 
+    //for 1.5 to select ID or First Name
     void searchPatient()
     {
         int choice;
@@ -446,6 +449,39 @@ public:
 class doctors {
 public:
 
+    void searchPatientByID()
+    {
+        string id;
+
+        hCurrent = hHead;
+        cout << "\n\tPlease Enter The Patient's ID: ";
+        cin >> id;
+
+        while (hCurrent != NULL)
+        {
+            if (hCurrent->info.id == id)
+            {
+                cout << "\n\t================================== PATIENT'S INFO ==================================\n";
+                cout << "\tPatient ID        : " << hCurrent->info.id << endl;
+                cout << "\tName              : " << hCurrent->info.first_name << " " << hCurrent->info.last_name << endl;
+                cout << "\tAge               : " << hCurrent->info.age << endl;
+                cout << "\tGender            : " << hCurrent->info.gender << endl;
+                cout << "\tPhone Number      : " << hCurrent->info.phone << endl;
+                cout << "\tAddress           : " << hCurrent->info.pAddress.addressNo << ", " << hCurrent->info.pAddress.buildingStreet << ", " << hCurrent->info.pAddress.city << ", " << hCurrent->info.pAddress.zip << ", " << hCurrent->info.pAddress.state << ", " << hCurrent->info.pAddress.country << endl;
+                cout << "\tDisability        : " << hCurrent->disab_option << endl;
+                cout << "\tCurrent date time : " << hCurrent->dateTime.year << "-" << hCurrent->dateTime.month << "-" << hCurrent->dateTime.date << " " << hCurrent->dateTime.hour << ":" << hCurrent->dateTime.minute << endl;
+                cout << "\t====================================================================================\n\n";
+                break;
+            }
+            else
+            {
+                hCurrent = hCurrent->next;
+            }
+        }
+
+        if (hCurrent == NULL)
+            cout << "\n\tThe Patient ID is not existed!\n";
+    }
 };
 
 class Design {
@@ -529,7 +565,9 @@ void nurseMenuPage()
             break;
 
         case 6:
-            cout << "soon";
+            system("cls");
+            nurse.sortByTime();
+            system("pause");
             break;
 
         case 7:
@@ -550,6 +588,8 @@ void nurseMenuPage()
 
 void doctorMenuPage()
 {
+    nurses nurse;
+    doctors doctor;
     Design design;
     int selection;
 
@@ -561,10 +601,14 @@ void doctorMenuPage()
         switch (selection)
         {
         case 1:
-            cout << "soon";
+            system("cls");
+            nurse.displayLinkedList();
+            system("pause");
             break;
         case 2:
-            cout << "soon";
+            system("cls");
+            doctor.searchPatientByID();
+            system("pause");
             break;
         case 3:
             cout << "soon";
@@ -708,6 +752,8 @@ void mainMenu()
 
 }
 
+
+
 int main() {
     nurses* nurse;
     Node* wNode;
@@ -726,3 +772,4 @@ int main() {
     mainMenu();
     return 0;
 }
+
