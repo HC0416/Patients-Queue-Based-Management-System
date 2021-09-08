@@ -6,6 +6,7 @@
 #include<windows.h>
 
 using namespace std;
+HANDLE color = GetStdHandle(STD_OUTPUT_HANDLE);
 
 struct address {
     string addressNo;
@@ -376,7 +377,11 @@ public:
         }
 
         if (wCurrent == NULL)
-            cout << "\n\tThe Patient ID is not existed!\n";
+        {
+            SetConsoleTextAttribute(color, 4);
+            cout << "\n\tPatient ID is not existed!\n";
+            SetConsoleTextAttribute(color, 7);
+        }
     }
 
     //for 1.5 to search by name
@@ -412,7 +417,12 @@ public:
         }
 
         if (wCurrent == NULL)
-            cout << "\n\tThe Patient's First Name is not existed!\n";
+        {
+            SetConsoleTextAttribute(color, 4);
+            cout << "\n\tPatient's First Name is not existed!\n";
+            SetConsoleTextAttribute(color, 7);
+        }
+
     }
 
     //for 1.5 to select ID or First Name
@@ -437,7 +447,9 @@ public:
             }
             else
             {
+                SetConsoleTextAttribute(color, 4);
                 cout << "Wrong Input! Please Try Again!";
+                SetConsoleTextAttribute(color, 7);
                 system("pause");
             }
 
@@ -515,7 +527,11 @@ public:
                                             cout << "\n\tCancel Update...";
                                         }
                                         else
+                                        {
+                                            SetConsoleTextAttribute(color, 4);
                                             cout << "\n\tWrong Input! Please try again!";
+                                            SetConsoleTextAttribute(color, 7);
+                                        }
                                     } while (toupper(selection2) != 'Y' && toupper(selection2) != 'N');
 
                                     break;
@@ -538,7 +554,11 @@ public:
                                             cout << "\n\tCancel Update...";
                                         }
                                         else
+                                        {
+                                            SetConsoleTextAttribute(color, 4);
                                             cout << "\n\tWrong Input! Please try again!";
+                                            SetConsoleTextAttribute(color, 7);
+                                        }
                                     } while (toupper(selection2) != 'Y' && toupper(selection2) != 'N');
 
                                     break;
@@ -578,7 +598,11 @@ public:
                                             cout << "\n\tCancel Update...";
                                         }
                                         else
+                                        {
+                                            SetConsoleTextAttribute(color, 4);
                                             cout << "\n\tWrong Input! Please try again!";
+                                            SetConsoleTextAttribute(color, 7);
+                                        }
                                     } while (toupper(selection2) != 'Y' && toupper(selection2) != 'N');
 
 
@@ -603,7 +627,11 @@ public:
                                             cout << "\n\tCancel Update...";
                                         }
                                         else
+                                        {
+                                            SetConsoleTextAttribute(color, 4);
                                             cout << "\n\tWrong Input! Please try again!";
+                                            SetConsoleTextAttribute(color, 7);
+                                        }
                                     } while (toupper(selection2) != 'Y' && toupper(selection2) != 'N');
 
                                     break;
@@ -627,7 +655,11 @@ public:
                                             cout << "\n\tCancel Update...";
                                         }
                                         else
+                                        {
+                                            SetConsoleTextAttribute(color, 4);
                                             cout << "\n\tWrong Input! Please try again!";
+                                            SetConsoleTextAttribute(color, 7);
+                                        }
                                     } while (toupper(selection2) != 'Y' && toupper(selection2) != 'N');
 
                                     break;
@@ -651,13 +683,19 @@ public:
                                             cout << "\n\tCancel Update...";
                                         }
                                         else
+                                        {
+                                            SetConsoleTextAttribute(color, 4);
                                             cout << "\n\tWrong Input! Please try again!";
+                                            SetConsoleTextAttribute(color, 7);
+                                        }
                                     } while (toupper(selection2) != 'Y' && toupper(selection2) != 'N');
 
                                     break;
 
                                 default:
+                                    SetConsoleTextAttribute(color, 4);
                                     cout << "\n\tWrong Input!";
+                                    SetConsoleTextAttribute(color, 7);
                                 }
 
                             } while (choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5 && choice != 6);
@@ -690,7 +728,9 @@ public:
                                 }
                                 else if (toupper(selection3) != 'Y' && toupper(selection3) != 'N')
                                 {
+                                    SetConsoleTextAttribute(color, 4);
                                     cout << "\n\tWrong Input! Please try Again!";
+                                    SetConsoleTextAttribute(color, 7);
                                 }
                             } while (toupper(selection3) != 'Y' && toupper(selection3) != 'N');
 
@@ -699,7 +739,9 @@ public:
                     }
                     else if (toupper(selection) != 'N' && toupper(selection) != 'Y')
                     {
+                        SetConsoleTextAttribute(color, 4);
                         cout << "\n\tWrong Input! Please Try Again!\n";
+                        SetConsoleTextAttribute(color, 7);
                     }
 
                 } while (toupper(selection) != 'N' && toupper(selection) != 'Y');
@@ -713,7 +755,11 @@ public:
         }
 
         if (hCurrent == NULL)
+        {
+            SetConsoleTextAttribute(color, 4);
             cout << "\n\tThe Patient ID is not existed!\n";
+            SetConsoleTextAttribute(color, 7);
+        }
     }
 };
 
@@ -810,7 +856,9 @@ void nurseMenuPage()
             break;
 
         default:
-            cout << "\nWrong Input! Try Again!\n";
+            SetConsoleTextAttribute(color, 4);
+            cout << "\n\tWrong Input! Try Again!\n";
+            SetConsoleTextAttribute(color, 7);
             system("pause");
         }
 
@@ -855,7 +903,9 @@ void doctorMenuPage()
             Sleep(1000);
             break;
         default:
-            cout << "\nWrong Input! Please Try Again!";
+            SetConsoleTextAttribute(color, 4);
+            cout << "\n\tWrong Input! Please Try Again!\n";
+            SetConsoleTextAttribute(color, 7);
             system("pause");
         }
 
@@ -918,7 +968,9 @@ void login()
             {
                 access = false;
                 index = _putch(NULL);
+                SetConsoleTextAttribute(color, 4);
                 cout << "\n\tID or Password are Not Correct! Please Try Again\n\n";
+                SetConsoleTextAttribute(color, 7);
                 system("pause");
                 cout << endl;
             }
@@ -939,7 +991,9 @@ void login()
             else {
                 access = false;
                 index = _putch(NULL);
+                SetConsoleTextAttribute(color, 4);
                 cout << "\n\tID or Password are Not Correct! Please Try Again\n\n";
+                SetConsoleTextAttribute(color, 7);
                 system("pause");
                 cout << endl;
             }
@@ -949,7 +1003,9 @@ void login()
         {
             access = false;
             index = _putch(NULL);
+            SetConsoleTextAttribute(color, 4);
             cout << "\n\tID is Not Correct! Please Try Again\n\n";
+            SetConsoleTextAttribute(color, 7);
             system("pause");
             cout << endl;
         }
@@ -978,7 +1034,9 @@ void mainMenu()
             cout << "\n\tBye!";
         }
         else {
+            SetConsoleTextAttribute(color, 4);
             cout << "\n\tWrong Input! Please Try Again!\n";
+            SetConsoleTextAttribute(color, 7);
             system("pause");
         }
     } while (selection != 2);
