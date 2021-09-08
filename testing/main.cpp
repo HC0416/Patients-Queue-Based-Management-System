@@ -449,6 +449,272 @@ public:
 class doctors {
 public:
 
+    void searchAndModify()
+    {
+        string id, pN, sicknessDecs, mediInfo, dcName, addressNo, buildingStreet, city, state, country;
+        int choice, age, AddressNo, zip;
+        char selection, selection2, selection3;
+
+        hCurrent = hHead;
+        cout << "\n\tPlease Enter The Patient's ID: ";
+        cin >> id;
+
+        while (hCurrent != NULL)
+        {
+            if (hCurrent->info.id == id)
+            {
+                cout << "\n\t================================== PATIENT'S INFO ==================================\n";
+                cout << "\tPatient ID           : " << hCurrent->info.id << endl;
+                cout << "\tName                 : " << hCurrent->info.first_name << " " << hCurrent->info.last_name << endl;
+                cout << "\tAge                  : " << hCurrent->info.age << endl;
+                cout << "\tGender               : " << hCurrent->info.gender << endl;
+                cout << "\tPhone Number         : " << hCurrent->info.phone << endl;
+                cout << "\tAddress              : " << hCurrent->info.pAddress.addressNo << ", " << hCurrent->info.pAddress.buildingStreet << ", " << hCurrent->info.pAddress.city << ", " << hCurrent->info.pAddress.zip << ", " << hCurrent->info.pAddress.state << ", " << hCurrent->info.pAddress.country << endl;
+                cout << "\tDisability           : " << hCurrent->disab_option << endl;
+                cout << "\tCurrent date time    : " << hCurrent->dateTime.year << "-" << hCurrent->dateTime.month << "-" << hCurrent->dateTime.date << " " << hCurrent->dateTime.hour << ":" << hCurrent->dateTime.minute << endl;
+                cout << "\tSickness Description : " << hCurrent->sickness_descp << endl;
+                cout << "\tMedicine Information : " << hCurrent->med_info << endl;
+                cout << "\tDoctor Name          : " << hCurrent->doct_name << endl;
+                cout << "\t====================================================================================\n\n";
+
+                do {
+                    cout << "\tWould you like to modify " << hCurrent->info.first_name << "'s infomation? (Y/N): ";
+                    cin >> selection;
+
+                    if (toupper(selection) == 'Y')
+                    {
+                        do {
+                            do {
+                                cout << "\n\t-----------------------------------------------------------------------------------\n\n";
+                                cout << "\t1. Age \n";
+                                cout << "\t2. Phone Number\n";
+                                cout << "\t3. Address\n";
+                                cout << "\t4. Sickness Desciption\n";
+                                cout << "\t5. Medicine Information\n";
+                                cout << "\t6. Doctor Name\n";
+                                cout << "\tWhich would you like to modify? (1-6): ";
+                                cin >> choice;
+
+                                switch (choice)
+                                {
+                                case 1:
+                                    cout << "\n\tCurrent Age  : " << hCurrent->info.age;
+                                    cout << "\n\tUpdated Age  : ";
+                                    cin >> age;
+
+                                    do {
+                                        cout << "\n\tConfirm to update age? (Y/N): ";
+                                        cin >> selection2;
+
+                                        if (toupper(selection2) == 'Y')
+                                        {
+                                            hCurrent->info.age = age;
+                                        }
+                                        else if (toupper(selection2) == 'N')
+                                        {
+                                            cout << "\n\tCancel Update...";
+                                        }
+                                        else
+                                            cout << "\n\tWrong Input! Please try again!";
+                                    } while (toupper(selection2) != 'Y' && toupper(selection2) != 'N');
+
+                                    break;
+
+                                case 2:
+                                    cout << "\n\tCurrent Phone Number  : " << hCurrent->info.phone;
+                                    cout << "\n\tUpdated Phone Number  : ";
+                                    cin >> pN;
+
+                                    do {
+                                        cout << "\n\tConfirm to update phone number? (Y/N): ";
+                                        cin >> selection2;
+
+                                        if (toupper(selection2) == 'Y')
+                                        {
+                                            hCurrent->info.phone = pN;
+                                        }
+                                        else if (toupper(selection2) == 'N')
+                                        {
+                                            cout << "\n\tCancel Update...";
+                                        }
+                                        else
+                                            cout << "\n\tWrong Input! Please try again!";
+                                    } while (toupper(selection2) != 'Y' && toupper(selection2) != 'N');
+
+                                    break;
+
+                                case 3:
+                                    cout << "\n\t Current Address  : " << hCurrent->info.pAddress.addressNo << ", " << hCurrent->info.pAddress.buildingStreet << ", " << hCurrent->info.pAddress.city << ", " << hCurrent->info.pAddress.zip << ", " << hCurrent->info.pAddress.state << ", " << hCurrent->info.pAddress.country;
+                                    cout << "\n\n\tUpdated Address ";
+                                    cout << "Address Number : ";
+                                    getline(cin, addressNo);
+                                    cout << "Buidling or Street Name : ";
+                                    getline(cin, buildingStreet);
+                                    cout << "Zip Number : ";
+                                    cin >> zip;
+                                    cin.ignore();
+                                    cout << "City : ";
+                                    getline(cin, city);
+                                    cout << "State : ";
+                                    getline(cin, state);
+                                    cout << "Country : ";
+                                    getline(cin, country);
+
+                                    do {
+                                        cout << "\n\tConfirm to update address? (Y/N): ";
+                                        cin >> selection2;
+
+                                        if (toupper(selection2) == 'Y')
+                                        {
+                                            hCurrent->info.pAddress.addressNo = addressNo;
+                                            hCurrent->info.pAddress.buildingStreet = buildingStreet;
+                                            hCurrent->info.pAddress.city = city;
+                                            hCurrent->info.pAddress.zip = zip;
+                                            hCurrent->info.pAddress.state = state;
+                                            hCurrent->info.pAddress.country = country;
+                                        }
+                                        else if (toupper(selection2) == 'N')
+                                        {
+                                            cout << "\n\tCancel Update...";
+                                        }
+                                        else
+                                            cout << "\n\tWrong Input! Please try again!";
+                                    } while (toupper(selection2) != 'Y' && toupper(selection2) != 'N');
+
+
+                                    break;
+
+                                case 4:
+                                    cin.ignore();
+                                    cout << "\n\tCurrent Sickness  : " << hCurrent->sickness_descp;
+                                    cout << "\n\tUpdated Sickness  : ";
+                                    getline(cin, sicknessDecs);
+
+                                    do {
+                                        cout << "\n\tConfirm to update sickness? (Y/N): ";
+                                        cin >> selection2;
+
+                                        if (toupper(selection2) == 'Y')
+                                        {
+                                            hCurrent->sickness_descp = sicknessDecs;
+                                        }
+                                        else if (toupper(selection2) == 'N')
+                                        {
+                                            cout << "\n\tCancel Update...";
+                                        }
+                                        else
+                                            cout << "\n\tWrong Input! Please try again!";
+                                    } while (toupper(selection2) != 'Y' && toupper(selection2) != 'N');
+
+                                    break;
+
+                                case 5:
+                                    cin.ignore();
+                                    cout << "\n\tCurrent Medicine Information  : " << hCurrent->med_info;
+                                    cout << "\n\tUpdated Medicine Information  : ";
+                                    getline(cin, mediInfo);
+
+                                    do {
+                                        cout << "\n\tConfirm to update medicine information? (Y/N): ";
+                                        cin >> selection2;
+
+                                        if (toupper(selection2) == 'Y')
+                                        {
+                                            hCurrent->med_info = mediInfo;
+                                        }
+                                        else if (toupper(selection2) == 'N')
+                                        {
+                                            cout << "\n\tCancel Update...";
+                                        }
+                                        else
+                                            cout << "\n\tWrong Input! Please try again!";
+                                    } while (toupper(selection2) != 'Y' && toupper(selection2) != 'N');
+
+                                    break;
+
+                                case 6:
+                                    cin.ignore();
+                                    cout << "\n\tCurrent Doctor Name  : " << hCurrent->doct_name;
+                                    cout << "\n\tUpdated Doctor Name  : ";
+                                    getline(cin, dcName);
+
+                                    do {
+                                        cout << "\n\tConfirm to update doctor name? (Y/N): ";
+                                        cin >> selection2;
+
+                                        if (toupper(selection2) == 'Y')
+                                        {
+                                            hCurrent->doct_name = dcName;
+                                        }
+                                        else if (toupper(selection2) == 'N')
+                                        {
+                                            cout << "\n\tCancel Update...";
+                                        }
+                                        else
+                                            cout << "\n\tWrong Input! Please try again!";
+                                    } while (toupper(selection2) != 'Y' && toupper(selection2) != 'N');
+
+                                    break;
+
+                                default:
+                                    cout << "\n\tWrong Input!";
+                                }
+
+                            } while (choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5 && choice != 6);
+
+                            do {
+                                cout << "\tWould you like to modify others? (Y/N): ";
+                                cin >> selection3;
+
+                                if (toupper(selection3) == 'N')
+                                {
+                                    system("cls");
+                                    cout << "\n\tUpdating...";
+                                    Sleep(1000);
+
+                                    system("cls");
+                                    cout << "\n\t=============================UPDATED PATIENT'S INFO ===============================\n";
+                                    cout << "\tPatient ID           : " << hCurrent->info.id << endl;
+                                    cout << "\tName                 : " << hCurrent->info.first_name << " " << hCurrent->info.last_name << endl;
+                                    cout << "\tAge                  : " << hCurrent->info.age << endl;
+                                    cout << "\tGender               : " << hCurrent->info.gender << endl;
+                                    cout << "\tPhone Number         : " << hCurrent->info.phone << endl;
+                                    cout << "\tAddress              : " << hCurrent->info.pAddress.addressNo << ", " << hCurrent->info.pAddress.buildingStreet << ", " << hCurrent->info.pAddress.city << ", " << hCurrent->info.pAddress.zip << ", " << hCurrent->info.pAddress.state << ", " << hCurrent->info.pAddress.country << endl;
+                                    cout << "\tDisability           : " << hCurrent->disab_option << endl;
+                                    cout << "\tCurrent date time    : " << hCurrent->dateTime.year << "-" << hCurrent->dateTime.month << "-" << hCurrent->dateTime.date << " " << hCurrent->dateTime.hour << ":" << hCurrent->dateTime.minute << endl;
+                                    cout << "\tSickness Description : " << hCurrent->sickness_descp << endl;
+                                    cout << "\tMedicine Information : " << hCurrent->med_info << endl;
+                                    cout << "\tDoctor Name          : " << hCurrent->doct_name << endl;
+                                    cout << "\t====================================================================================\n\n";
+                                    cout << "\t" << hCurrent->info.first_name << "'s information has been updated!\n\n";
+                                }
+                                else if (toupper(selection3) != 'Y' && toupper(selection3) != 'N')
+                                {
+                                    cout << "\n\tWrong Input! Please try Again!";
+                                }
+                            } while (toupper(selection3) != 'Y' && toupper(selection3) != 'N');
+
+                        } while (toupper(selection3) == 'Y');
+
+                    }
+                    else if (toupper(selection) != 'N' && toupper(selection) != 'Y')
+                    {
+                        cout << "\n\tWrong Input! Please Try Again!\n";
+                    }
+
+                } while (toupper(selection) != 'N' && toupper(selection) != 'Y');
+
+                break;
+            }
+            else
+            {
+                hCurrent = hCurrent->next;
+            }
+        }
+
+        if (hCurrent == NULL)
+            cout << "\n\tThe Patient ID is not existed!\n";
+    }
 };
 
 class Design {
@@ -574,7 +840,7 @@ void doctorMenuPage()
             break;
         case 2:
             system("cls");
-            cout << "soon";
+            doctor.searchAndModify();
             system("pause");
             break;
         case 3:
@@ -718,8 +984,6 @@ void mainMenu()
     } while (selection != 2);
 
 }
-
-
 
 int main() {
     nurses* nurse;
