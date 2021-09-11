@@ -495,6 +495,7 @@ public:
         } while (choice != 1 && choice != 2);
     }
 
+
 };
 
 class doctors {
@@ -800,6 +801,101 @@ public:
             SetConsoleTextAttribute(color, 7);
         }
     }
+
+    //2.4 Search patient history list using sickness description
+    void searchPatientbySickDesc() {
+        string sicknessDecs;
+
+        hCurrent = hHead;
+        cout << "Please enter the patient sickness description: ";
+        cin >> sicknessDecs;
+
+        if (hCurrent->sickness_descp == sicknessDecs)
+        {
+            cout << "\n\t================================== PATIENT'S INFO ==================================\n";
+            cout << "\tPatient ID           : " << hCurrent->info.id << endl;
+            cout << "\tName                 : " << hCurrent->info.first_name << " " << hCurrent->info.last_name << endl;
+            cout << "\tAge                  : " << hCurrent->info.age << endl;
+            cout << "\tGender               : " << hCurrent->info.gender << endl;
+            cout << "\tPhone Number         : " << hCurrent->info.phone << endl;
+            cout << "\tAddress              : " << hCurrent->info.pAddress.addressNo << ", " << hCurrent->info.pAddress.buildingStreet << ", " << hCurrent->info.pAddress.city << ", " << hCurrent->info.pAddress.zip << ", " << hCurrent->info.pAddress.state << ", " << hCurrent->info.pAddress.country << endl;
+            cout << "\tDisability           : " << hCurrent->disab_option << endl;
+            cout << "\tCurrent date time    : " << hCurrent->dateTime.year << "-" << hCurrent->dateTime.month << "-" << hCurrent->dateTime.date << " " << hCurrent->dateTime.hour << ":" << hCurrent->dateTime.minute << endl;
+            cout << "\tSickness Description : " << hCurrent->sickness_descp << endl;
+            cout << "\tMedicine Information : " << hCurrent->med_info << endl;
+            cout << "\tDoctor Name          : " << hCurrent->doct_name << endl;
+            cout << "\t====================================================================================\n\n";
+        }
+        if (wCurrent == NULL)
+        {
+            SetConsoleTextAttribute(color, 4);
+            cout << "\n\t Sickness Description is not existed!\n";
+            SetConsoleTextAttribute(color, 7);
+        }
+    }
+
+    //2.4 Search patient history list using first name
+    void searchPatientbyFirstName() {
+        string fname;
+
+        hCurrent = hHead;
+        cout << "Please enter the patient sickness description: ";
+        cin >> fname;
+
+        if (hCurrent->info.first_name == fname)
+        {
+            cout << "\n\t================================== PATIENT'S INFO ==================================\n";
+            cout << "\tPatient ID           : " << hCurrent->info.id << endl;
+            cout << "\tName                 : " << hCurrent->info.first_name << " " << hCurrent->info.last_name << endl;
+            cout << "\tAge                  : " << hCurrent->info.age << endl;
+            cout << "\tGender               : " << hCurrent->info.gender << endl;
+            cout << "\tPhone Number         : " << hCurrent->info.phone << endl;
+            cout << "\tAddress              : " << hCurrent->info.pAddress.addressNo << ", " << hCurrent->info.pAddress.buildingStreet << ", " << hCurrent->info.pAddress.city << ", " << hCurrent->info.pAddress.zip << ", " << hCurrent->info.pAddress.state << ", " << hCurrent->info.pAddress.country << endl;
+            cout << "\tDisability           : " << hCurrent->disab_option << endl;
+            cout << "\tCurrent date time    : " << hCurrent->dateTime.year << "-" << hCurrent->dateTime.month << "-" << hCurrent->dateTime.date << " " << hCurrent->dateTime.hour << ":" << hCurrent->dateTime.minute << endl;
+            cout << "\tSickness Description : " << hCurrent->sickness_descp << endl;
+            cout << "\tMedicine Information : " << hCurrent->med_info << endl;
+            cout << "\tDoctor Name          : " << hCurrent->doct_name << endl;
+            cout << "\t====================================================================================\n\n";
+        }
+        if (wCurrent == NULL)
+        {
+            SetConsoleTextAttribute(color, 4);
+            cout << "\n\tPatient's First Name is not existed!\n";
+            SetConsoleTextAttribute(color, 7);
+        }
+    }
+
+    //for 24 to select Sick Desc or First Name
+    void searchPatientHis()
+    {
+        int choice;
+
+        do {
+            system("cls");
+            cout << "\n\t1. Sickness Description";
+            cout << "\n\t2. Patient First Name";
+            cout << "\n\tWhat would you like to search on? (1,2): ";
+            cin >> choice;
+
+            if (choice == 1)
+            {
+                searchPatientbySickDesc();
+            }
+            else if (choice == 2)
+            {
+                searchPatientbyFirstName();
+            }
+            else
+            {
+                SetConsoleTextAttribute(color, 4);
+                cout << "Wrong Input! Please Try Again!";
+                SetConsoleTextAttribute(color, 7);
+                system("pause");
+            }
+
+        } while (choice != 1 && choice != 2);
+    }
 };
 
 class Design {
@@ -934,7 +1030,9 @@ void doctorMenuPage()
             cout << "soon";
             break;
         case 4:
-            cout << "soon";
+            system("cls");
+            doctor.searchPatientHis();
+            system("pause");
             break;
         case 5:
             system("cls");
