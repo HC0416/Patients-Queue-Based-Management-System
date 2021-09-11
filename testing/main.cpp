@@ -495,7 +495,41 @@ public:
         } while (choice != 1 && choice != 2);
     }
 
-
+    //for 1.4 delete the called patient
+    void calledpatient() {
+        char choice;
+        wCurrent = wHead;
+        cout << endl << endl;
+        cout << "The next patient to call is";
+        cout << "\n Patient ID : " << wCurrent->info.id <<
+            "\n Name : " << wCurrent->info.first_name + " " +
+            wCurrent->info.last_name << "\n Age : " << wCurrent->info.age
+            << "\n Gender : " << wCurrent->info.gender << "\n Phone No : " <<
+            wCurrent->info.phone << "\n Address : " << wCurrent->info.pAddress.addressNo +
+            ", " + wCurrent->info.pAddress.buildingStreet + ", " + wCurrent->info.pAddress.city +
+            ", " + to_string(wCurrent->info.pAddress.zip) + ", " + wCurrent->info.pAddress.state + ", " +
+            wCurrent->info.pAddress.country << "\n Disability : " << wCurrent->disab_option <<
+            "\n Current date time : " << wCurrent->dateTime.year << "-" << wCurrent->dateTime.month <<
+            "-" << wCurrent->dateTime.date << " " << wCurrent->dateTime.hour << ":" << wCurrent->dateTime.minute <<
+            endl << endl << "|------------------------------|" << endl;
+        cout << "\nCalling this patient";
+        Node* n = wHead; 
+        wHead = wHead->next; //copy the data of the next node to head
+        // Node* n store into the history list 
+        free(n); //free memory
+        cout << "The next patient to call is"; //The next head data
+        cout << "\n Patient ID : " << wHead->info.id <<
+            "\n Name : " << wHead->info.first_name + " " +
+            wHead->info.last_name << "\n Age : " << wHead->info.age
+            << "\n Gender : " << wHead->info.gender << "\n Phone No : " <<
+            wHead->info.phone << "\n Address : " << wHead->info.pAddress.addressNo +
+            ", " + wHead->info.pAddress.buildingStreet + ", " + wHead->info.pAddress.city +
+            ", " + to_string(wHead->info.pAddress.zip) + ", " + wHead->info.pAddress.state + ", " +
+            wHead->info.pAddress.country << "\n Disability : " << wHead->disab_option <<
+            "\n Current date time : " << wHead->dateTime.year << "-" << wHead->dateTime.month <<
+            "-" << wHead->dateTime.date << " " << wHead ->dateTime.hour << ":" << wHead->dateTime.minute <<
+            endl << endl << "|------------------------------|" << endl;
+    } 
 };
 
 class doctors {
@@ -802,6 +836,173 @@ public:
         }
     }
 
+    //calculate the length of the linked list
+    int findLength() {
+        int length = 0;
+        wCurrent = wHead;
+        while (wCurrent != NULL) {
+            length++;
+            wCurrent = wCurrent->next;
+        }
+        return length;
+    }
+
+    //convert linked list into an array
+    Node* convertToArray() {
+        int length = findLength();
+        int index = 0;
+        Node* nodeArrptr = new Node[length];
+        wCurrent = wHead;
+        while (wCurrent != NULL) {
+            *(nodeArrptr + (index++)) = *wCurrent;
+            wCurrent = wCurrent->next;
+        }
+        return nodeArrptr;
+    }
+
+    //swaping of node element in the list
+    void swap(Node& a, Node& b) {
+        Node change = a;
+        a = b;
+        b = change;
+    }
+
+    int arrSeperationFname(Node* arrPtr, int i,int j) {
+        string low = (arrPtr + (j))->info.first_name;
+        int x = (i - 1);
+
+        for (int y = i; y < j; y++) {
+            string high = (arrPtr + (y))->info.first_name;
+            if (high < low) {
+                x++;
+                swap(*(arrPtr + x), *(arrPtr + y));
+            }
+        }
+        swap(*(arrPtr + (x + 1)), *(arrPtr + (j)));
+        return (x + 1);
+    }
+    //for quick sort
+    void quickSortFname(Node* arrPtr, int low, int high) {
+        if (low < high) {
+            int index = arrSeperationFname(arrPtr, low, high);
+            quickSortFname(arrPtr, low, index - 1);
+            quickSortFname(arrPtr, index + 1, high);
+        }
+    }
+    // The display array is the waiting list should be history list, needed to change
+    void displayArray(Node* arrPtr, int length) {
+        int i = 0, choice3;
+        while (true) {
+            cout << endl << endl;
+            cout << i + 1 << ". Patient ID : " << (arrPtr + i)->info.id <<
+                "\n Name : " << (arrPtr + i)->info.first_name + " " +
+                (arrPtr + i)->info.last_name << "\n Age : " << (arrPtr + i)->info.age
+                << "\n Gender : " << (arrPtr + i)->info.gender << "\n Phone No : " <<
+                (arrPtr + i)->info.phone << "\n Address : " << (arrPtr + i)->info.pAddress.addressNo +
+                ", " + (arrPtr + i)->info.pAddress.buildingStreet + ", " + (arrPtr + i)->info.pAddress.city +
+                ", " + to_string((arrPtr + i)->info.pAddress.zip) + ", " + (arrPtr + i)->info.pAddress.state + ", " +
+                (arrPtr + i)->info.pAddress.country << "\n Disability : " << (arrPtr + i)->disab_option <<
+                "\n Current date time : " << (arrPtr + i)->dateTime.year << "-" << (arrPtr + i)->dateTime.month <<
+                "-" << (arrPtr + i)->dateTime.date << " " << (arrPtr + i)->dateTime.hour << ":" << (arrPtr + i)->dateTime.minute <<
+                endl << endl << "|------------------------------|" << endl;
+            cout << "Enter 0 to go back to main menu\nEnter 1 to move to previous page\nEnter 2 to move to next page\nChoice?  ";
+            cin >> choice3;
+            while (choice3 < 0 || choice3>2) {
+                cout << "\nInvalid choice, try again!" << endl;
+                cout << "Enter 0 to go back to main menu\nEnter 1 to move to previous page\nEnter 2 to move to next page\nChoice?  ";
+                cin >> choice3;
+            }
+            if (choice3 == 0) {
+                break;
+            }
+            else if (choice3 == 1) {
+                if ((i - 1) < 0) {
+                    cout << "\nThere is no previous record" << endl;
+                }
+                else {
+                    --i;
+                };
+            }
+            else {
+                if ((i + 1) > findLength() - 1) {
+                    cout << "\nThere is no next record" << endl;
+                }
+                else {
+                    ++i;
+                }
+            }
+        }
+        cout << "|______________________END OF RESULT________________________|" << endl;
+    }
+
+    void sortByFname() {
+        int length = findLength();
+        Node* nodeArrPtr = convertToArray();
+        quickSortFname(nodeArrPtr, 0, length - 1);
+        displayArray(nodeArrPtr, length);
+    }
+
+    int arrSeperationLname(Node* arrPtr, int i, int j) {
+        string low = (arrPtr + (j))->info.last_name;
+        int x = (i - 1);
+
+        for (int y = i; y < j; y++) {
+            string high = (arrPtr + (y))->info.last_name;
+            if (high < low) {
+                x++;
+                swap(*(arrPtr + x), *(arrPtr + y));
+            }
+        }
+        swap(*(arrPtr + (x + 1)), *(arrPtr + (j)));
+        return (x + 1);
+    }
+
+    // The display array is the waiting list should be history list, needed to change
+    void sortByLname() {
+        int length = findLength();
+        Node* nodeArrPtr = convertToArray();
+        quickSortLname(nodeArrPtr, 0, length - 1);
+        displayArray(nodeArrPtr, length);
+    }
+
+    void quickSortLname(Node* arrPtr, int low, int high) {
+        if (low < high) {
+            int index = arrSeperationLname(arrPtr, low, high);
+            quickSortLname(arrPtr, low, index - 1);
+            quickSortLname(arrPtr, index + 1, high);
+        }
+    }
+
+    //2.3 sort menu 
+    void sortMenu() {
+        int choice;
+
+        do {
+            system("cls");
+            cout << "\n\t======= PATIENT'S INFO ========";
+            cout << "\n\t1. First Name";
+            cout << "\n\t2. Last Name";
+            cout << "\n\tWhat would you like to sort by? (1,2): ";
+            cin >> choice;
+
+            if (choice == 1)
+            {
+                sortByFname();
+            }
+            else if (choice == 2)
+            {
+                sortByLname();
+            }
+            else
+            {
+                SetConsoleTextAttribute(color, 4);
+                cout << "Wrong Input! Please Try Again!";
+                SetConsoleTextAttribute(color, 7);
+                system("pause");
+            }
+
+        } while (choice != 1 && choice != 2);
+    }
     //2.4 Search patient history list using sickness description
     void searchPatientbySickDesc() {
         string sicknessDecs;
@@ -866,7 +1067,7 @@ public:
         }
     }
 
-    //for 24 to select Sick Desc or First Name
+    //for 2.4 to select Sick Desc or First Name (menu)
     void searchPatientHis()
     {
         int choice;
@@ -969,7 +1170,9 @@ void nurseMenuPage()
             system("pause");
             break;
         case 4:
-            cout << "soon";
+            system("cls");
+            nurse.calledpatient();
+            system("pause");
             break;
 
         case 5:
@@ -1027,7 +1230,9 @@ void doctorMenuPage()
             system("pause");
             break;
         case 3:
-            cout << "soon";
+            system("cls");
+            doctor.sortMenu();
+            system("pause");
             break;
         case 4:
             system("cls");
