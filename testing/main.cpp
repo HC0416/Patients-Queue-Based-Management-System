@@ -100,14 +100,29 @@ struct Node {
 class nurses {
 public:
 
+    string idGenerator(){//generate patient id automatically
+        int length = findLength();
+        string id;
+        ++length;
+        if(length<10){
+            id = "P000"+to_string(length);
+        }else if(length>=10 && length<100){
+            id = "P00" + to_string(length);
+        }else if(length>=100 && length <1000){
+            id = "P0" + to_string(length);
+        }else{
+            id = "P"+to_string(length);
+        }
+        return id;
+    }
+
     void addNewPatient() { //for question 1.1 adding patient to the waiting list (add into menu)
         string id, first_name, last_name, gender, phone, addressNo, buildingStreet, city, state, country;
         int age, zip, date, month, year, hour, minute, choice1, choice2;
         bool disab_option;
 
+        id = idGenerator();
         cin.ignore();
-        cout << "Please enter the information below" << endl << "Patient ID : ";
-        getline(cin, id);
         cout << "Patient first name : ";
         getline(cin, first_name);
         cout << "Patient last name : ";
@@ -320,22 +335,46 @@ public:
     }
     //display all the array, might change ltr
     void displayArray(Node* arrPtr, int length) {
-        for (int i = 0; i < length; i++) {
+        int i = 0, choice3;
+        while(true){
             cout << endl << endl;
-            cout << i + 1 << ". Patient ID : " << (arrPtr + i)->info.id <<
-                "\n Name : " << (arrPtr + i)->info.first_name + " " +
-                (arrPtr + i)->info.last_name << "\n Age : " << (arrPtr + i)->info.age
-                << "\n Gender : " << (arrPtr + i)->info.gender << "\n Phone No : " <<
-                (arrPtr + i)->info.phone << "\n Address : " << (arrPtr + i)->info.pAddress.addressNo +
-                ", " + (arrPtr + i)->info.pAddress.buildingStreet + ", " + (arrPtr + i)->info.pAddress.city +
-                ", " + to_string((arrPtr + i)->info.pAddress.zip) + ", " + (arrPtr + i)->info.pAddress.state + ", " +
-                (arrPtr + i)->info.pAddress.country << "\n Disability : " << (arrPtr + i)->disab_option <<
-                "\n Current date time : " << (arrPtr + i)->dateTime.year << "-" << (arrPtr + i)->dateTime.month <<
-                "-" << (arrPtr + i)->dateTime.date << " " << (arrPtr + i)->dateTime.hour << ":" << (arrPtr + i)->dateTime.minute <<
-                endl << endl << "|------------------------------|" << endl;
+            cout << i+1 << ". Patient ID : "<< (arrPtr+i)->info.id <<
+            "\n Name : " << (arrPtr+i)->info.first_name + " " +
+            (arrPtr+i)->info.last_name << "\n Age : " << (arrPtr+i)->info.age 
+            << "\n Gender : "<< (arrPtr+i)->info.gender << "\n Phone No : "<<
+            (arrPtr+i)->info.phone << "\n Address : " << (arrPtr+i)->info.pAddress.addressNo +
+            ", " + (arrPtr+i)->info.pAddress.buildingStreet + ", " + (arrPtr+i)->info.pAddress.city+
+            ", " + to_string((arrPtr+i)->info.pAddress.zip) + ", "+ (arrPtr+i)->info.pAddress.state+", "+ 
+            (arrPtr+i)->info.pAddress.country << "\n Disability : " << (arrPtr+i)->disab_option <<
+            "\n Current date time : " << (arrPtr+i)->dateTime.year <<"-"<<(arrPtr+i)->dateTime.month<<
+            "-"<<(arrPtr+i)->dateTime.date<<" "<<(arrPtr+i)->dateTime.hour<<":"<<(arrPtr+i)->dateTime.minute<<
+            endl<<endl<<"|------------------------------|" <<endl;    
+            cout << "Enter 0 to go back to main menu\nEnter 1 to move to previous page\nEnter 2 to move to next page\nChoice?  ";
+            cin >> choice3;
+            while(choice3<0||choice3>2){
+                cout << "\nInvalid choice, try again!" << endl;
+                cout << "Enter 0 to go back to main menu\nEnter 1 to move to previous page\nEnter 2 to move to next page\nChoice?  ";
+                cin >> choice3;
+            }
+            if(choice3==0){
+                break;
+            }else if(choice3 == 1){
+                if((i-1)<0){
+                    cout << "\nThere is no previous record" << endl;
+                }else{
+                    --i;
+                };
+            }else{
+                if((i+1)>findLength()-1){
+                    cout << "\nThere is no next record" << endl;
+                }else{
+                    ++i;
+                }  
+            }
         }
         cout << "|______________________END OF RESULT________________________|" << endl;
     }
+
     //this one for question 1.6, sort patients by visit time, (need to add into the main menu)
     void sortByTime() {
         int length = findLength();
@@ -1057,7 +1096,6 @@ int main() {
     nurse->insertNode(wNode);
     wNode = nurse->createNode("P0005", "Jean", "Kirschtein", 26, "male", "0174543214", "No. 65", "Street C", 13416, "City C", "State C", "A", 16, 8, 2021, 15, 45, false);
     nurse->insertNode(wNode);
-
     mainMenu();
     return 0;
 }
