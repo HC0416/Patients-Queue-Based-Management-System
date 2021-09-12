@@ -1059,7 +1059,7 @@ public:
             cout << "\tDoctor Name          : " << hCurrent->doct_name << endl;
             cout << "\t====================================================================================\n\n";
         }
-        if (wCurrent == NULL)
+        if (hCurrent == NULL)
         {
             SetConsoleTextAttribute(color, 4);
             cout << "\n\tPatient's First Name is not existed!\n";
@@ -1157,6 +1157,7 @@ void nurseMenuPage()
         case 1:
             system("cls");
             nurse.addNewPatient();
+            system("pause");
             break;
 
         case 2:
