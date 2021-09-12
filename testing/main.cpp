@@ -1040,7 +1040,7 @@ public:
         string fname;
 
         hCurrent = hHead;
-        cout << "Please enter the patient sickness description: ";
+        cout << "Please enter the patient first name: ";
         cin >> fname;
 
         if (hCurrent->info.first_name == fname)
