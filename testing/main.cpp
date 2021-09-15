@@ -95,15 +95,21 @@ struct Node {
         this->med_info = "";
     }
 
+    Node(patient_info info, date_time dateTime, bool disab_option, string sickness_descp, string doct_name, string med_info) {
+        this->info = info;
+        this->sickness_descp = sickness_descp;
+        this->dateTime = dateTime;
+        this->disab_option = disab_option;
+        this->doct_name = doct_name;
+        this->med_info = med_info;
+    }
+
 }*wHead, * wCurrent, * wTail, * hHead, * hCurrent, * hTail;
 
 class nurses {
 public:
-
-    string idGenerator(){//generate patient id automatically
-        int length = findLength();
+    string idMaker(int length){//generate patient id automatically
         string id;
-        ++length;
         if(length<10){
             id = "P000"+to_string(length);
         }else if(length>=10 && length<100){
@@ -116,12 +122,38 @@ public:
         return id;
     }
 
+    string idGenerator(){//making new id
+        hCurrent=hHead;
+        int length=1;
+        string id = idMaker(length);
+        while(hCurrent!=NULL){
+            if(id == hCurrent->info.id){
+                ++length;
+                id = idMaker(length);
+                hCurrent = hHead;
+            }
+            hCurrent=hCurrent->next;
+        }
+        wCurrent = wHead;
+        while(wCurrent!=NULL){
+            if(id == wCurrent->info.id){
+                ++length;
+                id = idMaker(length);
+                wCurrent = wHead;
+            }
+            wCurrent = wCurrent->next;
+        }
+        return id;
+    }
+
+
     void addNewPatient() { //for question 1.1 adding patient to the waiting list (add into menu)
         string id, first_name, last_name, gender, phone, addressNo, buildingStreet, city, state, country;
         int age, zip, date, month, year, hour, minute, choice1, choice2;
         bool disab_option;
 
         id = idGenerator();
+        cout << "---->New Patient ID : "<<id<<"<----"<<endl<<endl;
         cin.ignore();
         cout << "Patient first name : ";
         getline(cin, first_name);
@@ -534,6 +566,35 @@ public:
 
 class doctors {
 public:
+
+    Node* createHnode(string id, string first_name, string last_name, int age, string gender, string phone,
+        string addressNo, string buildingStreet, int zip, string city, string state, string country,
+        int date, int month, int year, int hour, int minute, bool disab_option, string sick_descp, string doct_name, string med_info) {
+        address ad = address(addressNo, buildingStreet, zip, city, state, country);
+        patient_info pI = patient_info(id, first_name, last_name, age, gender, phone, ad);
+        date_time dt = date_time(date, month, year, hour, minute);
+        Node* hptr = new Node(pI, dt, disab_option, sick_descp, doct_name, med_info);
+        return hptr;
+    }
+
+    void insertIntoHList(Node * hptr){
+        hptr->next = NULL;
+        hCurrent = hHead;
+        if(hHead==NULL){
+            hptr->prev = NULL;
+            hHead = hptr;
+            hTail = hptr;
+            return;
+        }
+        while(hCurrent->next!=NULL){
+            hCurrent = hCurrent->next;
+        }
+        hptr->prev = hCurrent;
+        hCurrent->next = hptr;
+        hTail = hptr;
+        return;
+    }
+
 
     void searchAndModify()
     {
@@ -1387,19 +1448,31 @@ void mainMenu()
 }
 
 int main() {
-    nurses* nurse;
-    Node* wNode;
-    nurse = NULL;
-    wNode = nurse->createNode("P0001", "Eren", "Yeager", 23, "male", "0124353214", "No. 54", "Street A", 13412, "City A", "State A", "A", 13, 8, 2021, 14, 45, true);
+    nurses* nurse = NULL;
+    doctors* doctor = NULL;
+    Node* wNode = NULL, *hNode = NULL;
+    wNode = nurse->createNode("P0006", "Eren", "Yeager", 23, "male", "0124353214", "No. 54", "Street A", 13412, "City A", "State A", "A", 22, 8, 2021, 14, 45, true);
     nurse->insertNode(wNode);
-    wNode = nurse->createNode("P0002", "Armin", "Arlelt", 21, "male", "0124453214", "No. 55", "Street A", 13412, "City A", "State A", "A", 13, 9, 2020, 15, 55, false);
+    wNode = nurse->createNode("P0007", "Armin", "Arlelt", 21, "male", "0124453214", "No. 55", "Street A", 13412, "City A", "State A", "A", 22, 8, 2021, 14, 55, false);
     nurse->insertNode(wNode);
-    wNode = nurse->createNode("P0003", "Mikasa", "Ackermann", 20, "female", "0124356765", "No. 56", "Street A", 13412, "City A", "State A", "A", 13, 1, 2019, 14, 45, false);
+    wNode = nurse->createNode("P0008", "Mikasa", "Ackerman", 20, "female", "0124356765", "No. 56", "Street A", 13412, "City A", "State A", "A", 22, 8, 2021, 14, 56, false);
     nurse->insertNode(wNode);
-    wNode = nurse->createNode("P0004", "Hange", "Zoe", 33, "female", "0198973214", "No. 12", "Street B", 13416, "City B", "State B", "A", 13, 10, 2021, 14, 46, true);
+    wNode = nurse->createNode("P0009", "Hange", "Zoe", 33, "female", "0198973214", "No. 12", "Street B", 13416, "City B", "State B", "A", 22, 8, 2021, 15, 6, true);
     nurse->insertNode(wNode);
-    wNode = nurse->createNode("P0005", "Jean", "Kirschtein", 26, "male", "0174543214", "No. 65", "Street C", 13416, "City C", "State C", "A", 16, 8, 2021, 15, 45, false);
+    wNode = nurse->createNode("P0010", "Jean", "Kirschtein", 26, "male", "0174543214", "No. 65", "Street C", 13416, "City C", "State C", "A", 22, 8, 2021, 15, 10, false);
     nurse->insertNode(wNode);
+    hNode = doctor->createHnode("P0001", "Levi", "Arkerman", 33, "male", "0124353214", "No. 59", "Street A", 13412, "City A", "State A", "A", 21, 8, 2021, 11, 34, true, "Allergies", "Doctor Chong", "Allergy shots");
+    doctor->insertIntoHList(hNode);
+    hNode = doctor->createHnode("P0002", "Erwin", "Smith", 50, "male", "0124453214", "No. 23", "Street A", 13412, "City A", "State A", "A", 21, 8, 2021, 12, 35, false, "Cold and Flu", "Doctor Chong", "Anti-flu medicines");
+    doctor->insertIntoHList(hNode);
+    hNode = doctor->createHnode("P0003", "Reiner", "Braun", 32, "male", "0124356765", "No. 43", "Street A", 13412, "City A", "State A", "A", 21, 8, 2021, 12, 36, false, "Cough", "Doctor Chong", "cough suppressant");
+    doctor->insertIntoHList(hNode);
+    hNode = doctor->createHnode("P0004", "Connie", "Springer", 20, "male", "0198973214", "No. 56", "Street B", 13416, "City B", "State B", "A", 21, 8, 2021, 12, 46, true, "Sore Throat", "Doctor Chong", "Antibiotics");
+    doctor->insertIntoHList(hNode);
+    hNode = doctor->createHnode("P0005", "Historia", "Reiss", 19, "female", "0174543214", "No. 21", "Street C", 13416, "City C", "State C", "A", 21, 8, 2021, 13, 45, false, "Fever", "Doctor Chong", "Aspirin");
+    doctor->insertIntoHList(hNode);
+    hNode = doctor->createHnode("P0001", "Levi", "Arkerman", 33, "male", "0124353214", "No. 59", "Street A", 13412, "City A", "State A", "A", 21, 8, 2021, 14, 45, true, "Allergies", "Doctor Chong", "Allergy shots");
+    doctor->insertIntoHList(hNode);
     mainMenu();
     return 0;
 }
