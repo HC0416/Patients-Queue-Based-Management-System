@@ -576,7 +576,7 @@ public:
     void insertNode(Node * hptr){
         hptr->next = NULL;
         hCurrent = hHead;
-        if(hHead==NULL){
+        if(hHead!=NULL){
             hptr->prev = NULL;
             hHead = hptr;
             hTail = hptr;
