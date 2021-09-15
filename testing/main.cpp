@@ -108,35 +108,38 @@ struct Node {
 
 class nurses {
 public:
-    string idMaker(int length){//generate patient id automatically
+    string idMaker(int length) {//generate patient id automatically
         string id;
-        if(length<10){
-            id = "P000"+to_string(length);
-        }else if(length>=10 && length<100){
+        if (length < 10) {
+            id = "P000" + to_string(length);
+        }
+        else if (length >= 10 && length < 100) {
             id = "P00" + to_string(length);
-        }else if(length>=100 && length <1000){
+        }
+        else if (length >= 100 && length < 1000) {
             id = "P0" + to_string(length);
-        }else{
-            id = "P"+to_string(length);
+        }
+        else {
+            id = "P" + to_string(length);
         }
         return id;
     }
 
-    string idGenerator(){//making new id
-        hCurrent=hHead;
-        int length=1;
+    string idGenerator() {//making new id
+        hCurrent = hHead;
+        int length = 1;
         string id = idMaker(length);
-        while(hCurrent!=NULL){
-            if(id == hCurrent->info.id){
+        while (hCurrent != NULL) {
+            if (id == hCurrent->info.id) {
                 ++length;
                 id = idMaker(length);
                 hCurrent = hHead;
             }
-            hCurrent=hCurrent->next;
+            hCurrent = hCurrent->next;
         }
         wCurrent = wHead;
-        while(wCurrent!=NULL){
-            if(id == wCurrent->info.id){
+        while (wCurrent != NULL) {
+            if (id == wCurrent->info.id) {
                 ++length;
                 id = idMaker(length);
                 wCurrent = wHead;
@@ -153,7 +156,7 @@ public:
         bool disab_option;
 
         id = idGenerator();
-        cout << "---->New Patient ID : "<<id<<"<----"<<endl<<endl;
+        cout << "---->New Patient ID : " << id << "<----" << endl << endl;
         cin.ignore();
         cout << "Patient first name : ";
         getline(cin, first_name);
@@ -368,40 +371,44 @@ public:
     //display all the array, might change ltr
     void displayArray(Node* arrPtr, int length) {
         int i = 0, choice3;
-        while(true){
+        while (true) {
             cout << endl << endl;
-            cout << i+1 << ". Patient ID : "<< (arrPtr+i)->info.id <<
-            "\n Name : " << (arrPtr+i)->info.first_name + " " +
-            (arrPtr+i)->info.last_name << "\n Age : " << (arrPtr+i)->info.age 
-            << "\n Gender : "<< (arrPtr+i)->info.gender << "\n Phone No : "<<
-            (arrPtr+i)->info.phone << "\n Address : " << (arrPtr+i)->info.pAddress.addressNo +
-            ", " + (arrPtr+i)->info.pAddress.buildingStreet + ", " + (arrPtr+i)->info.pAddress.city+
-            ", " + to_string((arrPtr+i)->info.pAddress.zip) + ", "+ (arrPtr+i)->info.pAddress.state+", "+ 
-            (arrPtr+i)->info.pAddress.country << "\n Disability : " << (arrPtr+i)->disab_option <<
-            "\n Current date time : " << (arrPtr+i)->dateTime.year <<"-"<<(arrPtr+i)->dateTime.month<<
-            "-"<<(arrPtr+i)->dateTime.date<<" "<<(arrPtr+i)->dateTime.hour<<":"<<(arrPtr+i)->dateTime.minute<<
-            endl<<endl<<"|------------------------------|" <<endl;    
+            cout << i + 1 << ". Patient ID : " << (arrPtr + i)->info.id <<
+                "\n Name : " << (arrPtr + i)->info.first_name + " " +
+                (arrPtr + i)->info.last_name << "\n Age : " << (arrPtr + i)->info.age
+                << "\n Gender : " << (arrPtr + i)->info.gender << "\n Phone No : " <<
+                (arrPtr + i)->info.phone << "\n Address : " << (arrPtr + i)->info.pAddress.addressNo +
+                ", " + (arrPtr + i)->info.pAddress.buildingStreet + ", " + (arrPtr + i)->info.pAddress.city +
+                ", " + to_string((arrPtr + i)->info.pAddress.zip) + ", " + (arrPtr + i)->info.pAddress.state + ", " +
+                (arrPtr + i)->info.pAddress.country << "\n Disability : " << (arrPtr + i)->disab_option <<
+                "\n Current date time : " << (arrPtr + i)->dateTime.year << "-" << (arrPtr + i)->dateTime.month <<
+                "-" << (arrPtr + i)->dateTime.date << " " << (arrPtr + i)->dateTime.hour << ":" << (arrPtr + i)->dateTime.minute <<
+                endl << endl << "|------------------------------|" << endl;
             cout << "Enter 0 to go back to main menu\nEnter 1 to move to previous page\nEnter 2 to move to next page\nChoice?  ";
             cin >> choice3;
-            while(choice3<0||choice3>2){
+            while (choice3 < 0 || choice3>2) {
                 cout << "\nInvalid choice, try again!" << endl;
                 cout << "Enter 0 to go back to main menu\nEnter 1 to move to previous page\nEnter 2 to move to next page\nChoice?  ";
                 cin >> choice3;
             }
-            if(choice3==0){
+            if (choice3 == 0) {
                 break;
-            }else if(choice3 == 1){
-                if((i-1)<0){
+            }
+            else if (choice3 == 1) {
+                if ((i - 1) < 0) {
                     cout << "\nThere is no previous record" << endl;
-                }else{
+                }
+                else {
                     --i;
                 };
-            }else{
-                if((i+1)>findLength()-1){
+            }
+            else {
+                if ((i + 1) > findLength() - 1) {
                     cout << "\nThere is no next record" << endl;
-                }else{
+                }
+                else {
                     ++i;
-                }  
+                }
             }
         }
         cout << "|______________________END OF RESULT________________________|" << endl;
@@ -545,7 +552,7 @@ public:
             "-" << wCurrent->dateTime.date << " " << wCurrent->dateTime.hour << ":" << wCurrent->dateTime.minute <<
             endl << endl << "|------------------------------|" << endl;
         cout << "\nCalling this patient";
-        Node* n = wHead; 
+        Node* n = wHead;
         wHead = wHead->next; //copy the data of the next node to head
         // Node* n store into the history list 
         free(n); //free memory
@@ -559,9 +566,9 @@ public:
             ", " + to_string(wHead->info.pAddress.zip) + ", " + wHead->info.pAddress.state + ", " +
             wHead->info.pAddress.country << "\n Disability : " << wHead->disab_option <<
             "\n Current date time : " << wHead->dateTime.year << "-" << wHead->dateTime.month <<
-            "-" << wHead->dateTime.date << " " << wHead ->dateTime.hour << ":" << wHead->dateTime.minute <<
+            "-" << wHead->dateTime.date << " " << wHead->dateTime.hour << ":" << wHead->dateTime.minute <<
             endl << endl << "|------------------------------|" << endl;
-    } 
+    }
 };
 
 class doctors {
@@ -577,16 +584,16 @@ public:
         return hptr;
     }
 
-    void insertIntoHList(Node * hptr){
+    void insertIntoHList(Node* hptr) {
         hptr->next = NULL;
         hCurrent = hHead;
-        if(hHead==NULL){
+        if (hHead == NULL) {
             hptr->prev = NULL;
             hHead = hptr;
             hTail = hptr;
             return;
         }
-        while(hCurrent->next!=NULL){
+        while (hCurrent->next != NULL) {
             hCurrent = hCurrent->next;
         }
         hptr->prev = hCurrent;
@@ -602,9 +609,11 @@ public:
         int choice, age, AddressNo, zip;
         char selection, selection2, selection3;
 
-        hCurrent = hHead;
+        hCurrent = hTail;
+
         cout << "\n\tPlease Enter The Patient's ID: ";
         cin >> id;
+
 
         while (hCurrent != NULL)
         {
@@ -885,7 +894,7 @@ public:
             }
             else
             {
-                hCurrent = hCurrent->next;
+                hCurrent = hCurrent->prev;
             }
         }
 
@@ -928,7 +937,7 @@ public:
         b = change;
     }
 
-    int arrSeperationFname(Node* arrPtr, int i,int j) {
+    int arrSeperationFname(Node* arrPtr, int i, int j) {
         string low = (arrPtr + (j))->info.first_name;
         int x = (i - 1);
 
@@ -1450,7 +1459,7 @@ void mainMenu()
 int main() {
     nurses* nurse = NULL;
     doctors* doctor = NULL;
-    Node* wNode = NULL, *hNode = NULL;
+    Node* wNode = NULL, * hNode = NULL;
     wNode = nurse->createNode("P0006", "Eren", "Yeager", 23, "male", "0124353214", "No. 54", "Street A", 13412, "City A", "State A", "A", 22, 8, 2021, 14, 45, true);
     nurse->insertNode(wNode);
     wNode = nurse->createNode("P0007", "Armin", "Arlelt", 21, "male", "0124453214", "No. 55", "Street A", 13412, "City A", "State A", "A", 22, 8, 2021, 14, 55, false);
