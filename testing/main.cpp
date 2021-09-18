@@ -755,18 +755,19 @@ public:
                                 case 3:
                                     cout << "\n\t Current Address  : " << hCurrent->info.pAddress.addressNo << ", " << hCurrent->info.pAddress.buildingStreet << ", " << hCurrent->info.pAddress.city << ", " << hCurrent->info.pAddress.zip << ", " << hCurrent->info.pAddress.state << ", " << hCurrent->info.pAddress.country;
                                     cout << "\n\n\tUpdated Address ";
-                                    cout << "Address Number : ";
+                                    cin.ignore();
+                                    cout << "\n\tAddress Number : ";
                                     getline(cin, addressNo);
-                                    cout << "Buidling or Street Name : ";
+                                    cout << "\tBuidling or Street Name : ";
                                     getline(cin, buildingStreet);
-                                    cout << "Zip Number : ";
+                                    cout << "\ttZip Number : ";
                                     cin >> zip;
                                     cin.ignore();
-                                    cout << "City : ";
+                                    cout << "\tCity : ";
                                     getline(cin, city);
-                                    cout << "State : ";
+                                    cout << "\tState : ";
                                     getline(cin, state);
-                                    cout << "Country : ";
+                                    cout << "\tCountry : ";
                                     getline(cin, country);
 
                                     do {
