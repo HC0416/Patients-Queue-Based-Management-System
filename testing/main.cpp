@@ -250,6 +250,24 @@ public:
         return;
     }
 
+    //transfer waiting list to history list 
+    void transferNode(Node* hptr) {
+        hptr->next = NULL;
+        hCurrent = hHead;
+        if (hHead == NULL) {
+            hptr->prev = NULL;
+            hHead = hptr;
+            hTail = hptr;
+            return;
+        }
+        while (hCurrent->next != NULL) {
+            hCurrent = hCurrent->next;
+        }
+        hptr->prev = hCurrent;
+        hCurrent->next = hptr;
+        hTail = hptr;
+        return;
+    }
     //fulfilled question 1.2, when there disab_option is true for the new node, then will call this function to add the node infront of the queue,
     //at least in front of those who aren't disable
     void insertPriority(Node* wptr) {
@@ -536,8 +554,31 @@ public:
 
     //for 1.4 delete the called patient
     void calledpatient() {
-        char choice;
+        string id, first_name, last_name, gender, phone, addressNo, buildingStreet, city, state, country;
+        int age, zip, date, month, year, hour, minute;
+        bool disab_option;
+     
         wCurrent = wHead;
+
+        id = wCurrent->info.id;
+        first_name = wCurrent->info.first_name;
+        last_name = wCurrent->info.last_name;
+        age = wCurrent->info.age;
+        gender = wCurrent->info.gender;
+        phone = wCurrent->info.phone;
+        addressNo = wCurrent->info.pAddress.addressNo;
+        buildingStreet = wCurrent->info.pAddress.buildingStreet;
+        city = wCurrent->info.pAddress.city;
+        zip = wCurrent->info.pAddress.zip;
+        state = wCurrent->info.pAddress.state;
+        country = wCurrent->info.pAddress.country;
+        disab_option = wCurrent->disab_option;
+        date = wCurrent->dateTime.date;
+        year = wCurrent->dateTime.year;
+        month = wCurrent->dateTime.month;
+        hour = wCurrent->dateTime.hour;
+        minute = wCurrent->dateTime.minute;
+
         cout << endl << endl;
         cout << "The next patient to call is";
         cout << "\n Patient ID : " << wCurrent->info.id <<
@@ -553,10 +594,14 @@ public:
             endl << endl << "|------------------------------|" << endl;
         cout << "\nCalling this patient";
         Node* n = wHead;
-        wHead = wHead->next; //copy the data of the next node to head
-        // Node* n store into the history list 
+        //copy the data of the next node to head
+        wHead = wHead->next; 
+        //createNode
+        Node* nodeptr = createNode(id, first_name, last_name, age, gender, phone, addressNo, buildingStreet, zip, city, state, country, date, month, year, hour, minute, disab_option);
+        // Node* n store into the history list
+        transferNode(nodeptr);
         free(n); //free memory
-        cout << "The next patient to call is"; //The next head data
+        cout << "\nThe next patient to call is"; //The next head data
         cout << "\n Patient ID : " << wHead->info.id <<
             "\n Name : " << wHead->info.first_name + " " +
             wHead->info.last_name << "\n Age : " << wHead->info.age
@@ -909,10 +954,10 @@ public:
     //calculate the length of the linked list
     int findLength() {
         int length = 0;
-        wCurrent = wHead;
-        while (wCurrent != NULL) {
+        hCurrent = hHead;
+        while (hCurrent != NULL) {
             length++;
-            wCurrent = wCurrent->next;
+            hCurrent = hCurrent->next;
         }
         return length;
     }
@@ -922,10 +967,10 @@ public:
         int length = findLength();
         int index = 0;
         Node* nodeArrptr = new Node[length];
-        wCurrent = wHead;
-        while (wCurrent != NULL) {
-            *(nodeArrptr + (index++)) = *wCurrent;
-            wCurrent = wCurrent->next;
+        hCurrent = hHead;
+        while (hCurrent != NULL) {
+            *(nodeArrptr + (index++)) = *hCurrent;
+            hCurrent = hCurrent->next;
         }
         return nodeArrptr;
     }
