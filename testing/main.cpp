@@ -1404,7 +1404,7 @@ void doctorMenuPage()
 
     do {
         design.doctorMenu();
-        cout << "\n\tPlease selection one of the option: ";
+        cout << "\n\tPlease select one of the option: ";
         cin >> selection;
 
         switch (selection)
