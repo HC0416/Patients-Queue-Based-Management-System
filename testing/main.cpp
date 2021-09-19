@@ -978,34 +978,48 @@ public:
 
     //swaping of node element in the list
     void swap(Node& a, Node& b) {
-        Node change = a;
+        Node temp = a;
         a = b;
-        b = change;
+        b = temp;
     }
+   
+    void selectionFSort(Node* arrPtr, int n) {
+        int i, j;
 
-    int arrSeperationFname(Node* arrPtr, int i, int j) {
-        string low = (arrPtr + (j))->info.first_name;
-        int x = (i - 1);
-
-        for (int y = i; y < j; y++) {
-            string high = (arrPtr + (y))->info.first_name;
-            if (high < low) {
-                x++;
-                swap(*(arrPtr + x), *(arrPtr + y));
+        for (i = 0; i < n - 1; i++) {
+            string min = (arrPtr + (i))->info.first_name;
+            int min_index = i;
+            for (j = i + 1; j < n; j++) {
+                string max = (arrPtr + (j))->info.first_name;
+                if (max > min) {
+                    min_index = j;
+                    min = max;
+                    
+                }
             }
-        }
-        swap(*(arrPtr + (x + 1)), *(arrPtr + (j)));
-        return (x + 1);
-    }
-    //for quick sort
-    void quickSortFname(Node* arrPtr, int low, int high) {
-        if (low < high) {
-            int index = arrSeperationFname(arrPtr, low, high);
-            quickSortFname(arrPtr, low, index - 1);
-            quickSortFname(arrPtr, index + 1, high);
+            swap(*(arrPtr + (i)), *(arrPtr + (min_index)));
         }
     }
-    // The display array is the waiting list should be history list, needed to change
+
+    void selectionLSort(Node* arrPtr, int n) {
+        int i, j;
+
+        for (i = 0; i < n - 1; i++) {
+            string min = (arrPtr + (i))->info.last_name;
+            int min_index = i;
+            for (j = i + 1; j < n; j++) {
+                string max = (arrPtr + (j))->info.last_name;
+                if (max > min) {
+                    min_index = j;
+                    min = max;
+
+                }
+            }
+            swap(*(arrPtr + (i)), *(arrPtr + (min_index)));
+        }
+    }
+
+    //display array
     void displayArray(Node* arrPtr, int length) {
         int i = 0, choice3;
         while (true) {
@@ -1051,42 +1065,20 @@ public:
         cout << "|______________________END OF RESULT________________________|" << endl;
     }
 
+    //sort by frontname
     void sortByFname() {
         int length = findLength();
         Node* nodeArrPtr = convertToArray();
-        quickSortFname(nodeArrPtr, 0, length - 1);
+        selectionFSort(nodeArrPtr, length);
         displayArray(nodeArrPtr, length);
     }
 
-    int arrSeperationLname(Node* arrPtr, int i, int j) {
-        string low = (arrPtr + (j))->info.last_name;
-        int x = (i - 1);
-
-        for (int y = i; y < j; y++) {
-            string high = (arrPtr + (y))->info.last_name;
-            if (high < low) {
-                x++;
-                swap(*(arrPtr + x), *(arrPtr + y));
-            }
-        }
-        swap(*(arrPtr + (x + 1)), *(arrPtr + (j)));
-        return (x + 1);
-    }
-
-    // The display array is the waiting list should be history list, needed to change
+    //sort by lastname
     void sortByLname() {
         int length = findLength();
         Node* nodeArrPtr = convertToArray();
-        quickSortLname(nodeArrPtr, 0, length - 1);
+        selectionLSort(nodeArrPtr, length);
         displayArray(nodeArrPtr, length);
-    }
-
-    void quickSortLname(Node* arrPtr, int low, int high) {
-        if (low < high) {
-            int index = arrSeperationLname(arrPtr, low, high);
-            quickSortLname(arrPtr, low, index - 1);
-            quickSortLname(arrPtr, index + 1, high);
-        }
     }
 
     //2.3 sort menu 
