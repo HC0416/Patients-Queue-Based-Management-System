@@ -164,7 +164,7 @@ public:
         getline(cin, last_name);
         cout << "\tWhat is the gender? 1. Male \t 2. Female : ";
         cin >> choice1;
-        while (!(choice1 > 0) && (choice1 < 3)) {
+        while (!((choice1 > 0) && (choice1 < 3))) {
             SetConsoleTextAttribute(color, 4);
             cout << "\tInvalid answer, please try again" << endl;
             SetConsoleTextAttribute(color, 7);
@@ -174,7 +174,7 @@ public:
         if (choice1 == 1) {
             gender = "male";
         }
-        else {
+        else{
             gender = "female";
         }
 
