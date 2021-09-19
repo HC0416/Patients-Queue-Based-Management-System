@@ -760,7 +760,7 @@ public:
                                     getline(cin, addressNo);
                                     cout << "\tBuidling or Street Name : ";
                                     getline(cin, buildingStreet);
-                                    cout << "\ttZip Number : ";
+                                    cout << "\tZip Number : ";
                                     cin >> zip;
                                     cin.ignore();
                                     cout << "\tCity : ";
