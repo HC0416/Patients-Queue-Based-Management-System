@@ -314,22 +314,45 @@ public:
     void displayLinkedList() {
         wCurrent = wHead;
         int i = 0;
-        while (wCurrent != NULL) {
-            cout << endl << endl;
-            cout << ++i << ". Patient ID : " << wCurrent->info.id <<
-                "\n Name : " << wCurrent->info.first_name + " " +
-                wCurrent->info.last_name << "\n Age : " << wCurrent->info.age
-                << "\n Gender : " << wCurrent->info.gender << "\n Phone No : " <<
-                wCurrent->info.phone << "\n Address : " << wCurrent->info.pAddress.addressNo +
-                ", " + wCurrent->info.pAddress.buildingStreet + ", " + wCurrent->info.pAddress.city +
-                ", " + to_string(wCurrent->info.pAddress.zip) + ", " + wCurrent->info.pAddress.state + ", " +
-                wCurrent->info.pAddress.country << "\n Disability : " << wCurrent->disab_option <<
-                "\n Current date time : " << wCurrent->dateTime.year << "-" << wCurrent->dateTime.month <<
-                "-" << wCurrent->dateTime.date << " " << wCurrent->dateTime.hour << ":" << wCurrent->dateTime.minute <<
-                endl << endl << "|------------------------------|" << endl;
+        int no = 0;
+
+        cout << "\n\n\t\t\t\t\t\t\t\tWAITING LIST\n";
+        cout << "\t=========================================================================================================================================================";
+        cout << "\n\tNO\tPATIENT ID\tNAME\t\tAGE\tGENDER\tPHONE NUMBER\tADDRESS\t\t\t\t\t\tDISABILITY\tCURRENT DATE TIME";
+        cout << "\n\t=========================================================================================================================================================\n";
+
+        while (wCurrent != NULL)
+        {
+            no++;
+
+            cout << "\t" << no << "\t" << wCurrent->info.id << "\t\t" << wCurrent->info.first_name << " " << wCurrent->info.last_name << "\t" << wCurrent->info.age
+                << "\t" << wCurrent->info.gender << "\t" << wCurrent->info.phone << "\t" << wCurrent->info.pAddress.addressNo + ", " +
+                wCurrent->info.pAddress.buildingStreet + ", " + wCurrent->info.pAddress.city + ", " + to_string(wCurrent->info.pAddress.zip)
+                + ", " + wCurrent->info.pAddress.state + ", " + wCurrent->info.pAddress.country << "\t" << wCurrent->disab_option << "\t\t"
+                << wCurrent->dateTime.year << "-" << wCurrent->dateTime.month << "-" << wCurrent->dateTime.date << " " <<
+                wCurrent->dateTime.hour << ":" << wCurrent->dateTime.minute << endl;
+
             wCurrent = wCurrent->next;
         }
-        cout << "|______________________END OF RESULT________________________|" << endl;
+
+        cout << "\t=========================================================================================================================================================\n\n\n";
+
+        //while (wCurrent != NULL) {
+        //    cout << endl << endl;
+        //    cout << ++i << ". Patient ID : " << wCurrent->info.id <<
+        //        "\n Name : " << wCurrent->info.first_name + " " +
+        //        wCurrent->info.last_name << "\n Age : " << wCurrent->info.age
+        //        << "\n Gender : " << wCurrent->info.gender << "\n Phone No : " <<
+        //        wCurrent->info.phone << "\n Address : " << wCurrent->info.pAddress.addressNo +
+        //        ", " + wCurrent->info.pAddress.buildingStreet + ", " + wCurrent->info.pAddress.city +
+        //        ", " + to_string(wCurrent->info.pAddress.zip) + ", " + wCurrent->info.pAddress.state + ", " +
+        //        wCurrent->info.pAddress.country << "\n Disability : " << wCurrent->disab_option <<
+        //        "\n Current date time : " << wCurrent->dateTime.year << "-" << wCurrent->dateTime.month <<
+        //        "-" << wCurrent->dateTime.date << " " << wCurrent->dateTime.hour << ":" << wCurrent->dateTime.minute <<
+        //        endl << endl << "|------------------------------|" << endl;
+        //    wCurrent = wCurrent->next;
+        //}
+        //cout << "|______________________END OF RESULT________________________|" << endl;
     }
 
     //calculate the length of the linked list
@@ -389,24 +412,45 @@ public:
     //display all the array, might change ltr
     void displayArray(Node* arrPtr, int length) {
         int i = 0, choice3;
+
         while (true) {
-            cout << endl << endl;
-            cout << i + 1 << ". Patient ID : " << (arrPtr + i)->info.id <<
-                "\n Name : " << (arrPtr + i)->info.first_name + " " +
-                (arrPtr + i)->info.last_name << "\n Age : " << (arrPtr + i)->info.age
-                << "\n Gender : " << (arrPtr + i)->info.gender << "\n Phone No : " <<
-                (arrPtr + i)->info.phone << "\n Address : " << (arrPtr + i)->info.pAddress.addressNo +
+            system("cls");
+            cout << endl << endl << "\t\t\tSORT BY CURRENT TIME";
+            cout << "\n\t--------------------------------------------------------------";
+            cout << "\n\tNo                : " << i + 1;
+            cout << "\n\tPatient ID        : " << (arrPtr + i)->info.id;
+            cout << "\n\tName              : " << (arrPtr + i)->info.first_name + " " + (arrPtr + i)->info.last_name;
+            cout << "\n\tAge               : " << (arrPtr + i)->info.age;
+            cout << "\n\tGender            : " << (arrPtr + i)->info.gender;
+            cout << "\n\tPhone Number      : " << (arrPtr + i)->info.phone;
+            cout << "\n\tAddress           : " << (arrPtr + i)->info.pAddress.addressNo +
                 ", " + (arrPtr + i)->info.pAddress.buildingStreet + ", " + (arrPtr + i)->info.pAddress.city +
                 ", " + to_string((arrPtr + i)->info.pAddress.zip) + ", " + (arrPtr + i)->info.pAddress.state + ", " +
-                (arrPtr + i)->info.pAddress.country << "\n Disability : " << (arrPtr + i)->disab_option <<
-                "\n Current date time : " << (arrPtr + i)->dateTime.year << "-" << (arrPtr + i)->dateTime.month <<
-                "-" << (arrPtr + i)->dateTime.date << " " << (arrPtr + i)->dateTime.hour << ":" << (arrPtr + i)->dateTime.minute <<
-                endl << endl << "|------------------------------|" << endl;
-            cout << "Enter 0 to go back to main menu\nEnter 1 to move to previous page\nEnter 2 to move to next page\nChoice?  ";
+                (arrPtr + i)->info.pAddress.country;
+            cout << "\n\tDisability        : " << (arrPtr + i)->disab_option;
+            cout << "\n\tCurrent Date Time : " << (arrPtr + i)->dateTime.year << "-" << (arrPtr + i)->dateTime.month <<
+                "-" << (arrPtr + i)->dateTime.date << " " << (arrPtr + i)->dateTime.hour << ":" << (arrPtr + i)->dateTime.minute;
+            cout << "\n\t--------------------------------------------------------------\n\n";
+
+            //cout << i + 1 << ". Patient ID : " << (arrPtr + i)->info.id <<
+            //    "\n Name : " << (arrPtr + i)->info.first_name + " " +
+            //    (arrPtr + i)->info.last_name << "\n Age : " << (arrPtr + i)->info.age
+            //    << "\n Gender : " << (arrPtr + i)->info.gender << "\n Phone No : " <<
+            //    (arrPtr + i)->info.phone << "\n Address : " << (arrPtr + i)->info.pAddress.addressNo +
+            //    ", " + (arrPtr + i)->info.pAddress.buildingStreet + ", " + (arrPtr + i)->info.pAddress.city +
+            //    ", " + to_string((arrPtr + i)->info.pAddress.zip) + ", " + (arrPtr + i)->info.pAddress.state + ", " +
+            //    (arrPtr + i)->info.pAddress.country << "\n Disability : " << (arrPtr + i)->disab_option <<
+            //    "\n Current date time : " << (arrPtr + i)->dateTime.year << "-" << (arrPtr + i)->dateTime.month <<
+            //    "-" << (arrPtr + i)->dateTime.date << " " << (arrPtr + i)->dateTime.hour << ":" << (arrPtr + i)->dateTime.minute <<
+            //    endl << endl << "|------------------------------|" << endl;
+
+            cout << "\tEnter 0 to go back to main menu\n\tEnter 1 to move to previous page\n\tEnter 2 to move to next page\n\tChoice?  ";
             cin >> choice3;
             while (choice3 < 0 || choice3>2) {
-                cout << "\nInvalid choice, try again!" << endl;
-                cout << "Enter 0 to go back to main menu\nEnter 1 to move to previous page\nEnter 2 to move to next page\nChoice?  ";
+                SetConsoleTextAttribute(color, 4);
+                cout << "\n\tInvalid choice, try again!" << endl;
+                SetConsoleTextAttribute(color, 7);
+                cout << "\tEnter 0 to go back to main menu\n\tEnter 1 to move to previous page\n\tEnter 2 to move to next page\n\tChoice?  ";
                 cin >> choice3;
             }
             if (choice3 == 0) {
@@ -414,7 +458,10 @@ public:
             }
             else if (choice3 == 1) {
                 if ((i - 1) < 0) {
-                    cout << "\nThere is no previous record" << endl;
+                    SetConsoleTextAttribute(color, 4);
+                    cout << "\n\tThere is no previous record" << endl;
+                    SetConsoleTextAttribute(color, 7);
+                    system("pause");
                 }
                 else {
                     --i;
@@ -422,14 +469,17 @@ public:
             }
             else {
                 if ((i + 1) > findLength() - 1) {
-                    cout << "\nThere is no next record" << endl;
+                    SetConsoleTextAttribute(color, 4);
+                    cout << "\n\tThere is no next record" << endl;
+                    SetConsoleTextAttribute(color, 7);
+                    system("pause");
                 }
                 else {
                     ++i;
                 }
             }
         }
-        cout << "|______________________END OF RESULT________________________|" << endl;
+        //cout << "|______________________END OF RESULT________________________|" << endl;
     }
 
     //this one for question 1.6, sort patients by visit time, (need to add into the main menu)
@@ -1022,24 +1072,45 @@ public:
     //display array
     void displayArray(Node* arrPtr, int length) {
         int i = 0, choice3;
+
         while (true) {
-            cout << endl << endl;
-            cout << i + 1 << ". Patient ID : " << (arrPtr + i)->info.id <<
-                "\n Name : " << (arrPtr + i)->info.first_name + " " +
-                (arrPtr + i)->info.last_name << "\n Age : " << (arrPtr + i)->info.age
-                << "\n Gender : " << (arrPtr + i)->info.gender << "\n Phone No : " <<
-                (arrPtr + i)->info.phone << "\n Address : " << (arrPtr + i)->info.pAddress.addressNo +
+            system("cls");
+            cout << endl << endl << "\t\t\tSORT IN DESCENDING ORDER";
+            cout << "\n\t--------------------------------------------------------------";
+            cout << "\n\tNo                : " << i + 1;
+            cout << "\n\tPatient ID        : " << (arrPtr + i)->info.id;
+            cout << "\n\tName              : " << (arrPtr + i)->info.first_name + " " + (arrPtr + i)->info.last_name;
+            cout << "\n\tAge               : " << (arrPtr + i)->info.age;
+            cout << "\n\tGender            : " << (arrPtr + i)->info.gender;
+            cout << "\n\tPhone Number      : " << (arrPtr + i)->info.phone;
+            cout << "\n\tAddress           : " << (arrPtr + i)->info.pAddress.addressNo +
                 ", " + (arrPtr + i)->info.pAddress.buildingStreet + ", " + (arrPtr + i)->info.pAddress.city +
                 ", " + to_string((arrPtr + i)->info.pAddress.zip) + ", " + (arrPtr + i)->info.pAddress.state + ", " +
-                (arrPtr + i)->info.pAddress.country << "\n Disability : " << (arrPtr + i)->disab_option <<
-                "\n Current date time : " << (arrPtr + i)->dateTime.year << "-" << (arrPtr + i)->dateTime.month <<
-                "-" << (arrPtr + i)->dateTime.date << " " << (arrPtr + i)->dateTime.hour << ":" << (arrPtr + i)->dateTime.minute <<
-                endl << endl << "|------------------------------|" << endl;
-            cout << "Enter 0 to go back to main menu\nEnter 1 to move to previous page\nEnter 2 to move to next page\nChoice?  ";
+                (arrPtr + i)->info.pAddress.country;
+            cout << "\n\tDisability        : " << (arrPtr + i)->disab_option;
+            cout << "\n\tCurrent Date Time : " << (arrPtr + i)->dateTime.year << "-" << (arrPtr + i)->dateTime.month <<
+                "-" << (arrPtr + i)->dateTime.date << " " << (arrPtr + i)->dateTime.hour << ":" << (arrPtr + i)->dateTime.minute;
+            cout << "\n\t--------------------------------------------------------------\n\n";
+
+            //cout << i + 1 << ". Patient ID : " << (arrPtr + i)->info.id <<
+            //    "\n Name : " << (arrPtr + i)->info.first_name + " " +
+            //    (arrPtr + i)->info.last_name << "\n Age : " << (arrPtr + i)->info.age
+            //    << "\n Gender : " << (arrPtr + i)->info.gender << "\n Phone No : " <<
+            //    (arrPtr + i)->info.phone << "\n Address : " << (arrPtr + i)->info.pAddress.addressNo +
+            //    ", " + (arrPtr + i)->info.pAddress.buildingStreet + ", " + (arrPtr + i)->info.pAddress.city +
+            //    ", " + to_string((arrPtr + i)->info.pAddress.zip) + ", " + (arrPtr + i)->info.pAddress.state + ", " +
+            //    (arrPtr + i)->info.pAddress.country << "\n Disability : " << (arrPtr + i)->disab_option <<
+            //    "\n Current date time : " << (arrPtr + i)->dateTime.year << "-" << (arrPtr + i)->dateTime.month <<
+            //    "-" << (arrPtr + i)->dateTime.date << " " << (arrPtr + i)->dateTime.hour << ":" << (arrPtr + i)->dateTime.minute <<
+            //    endl << endl << "|------------------------------|" << endl;
+
+            cout << "\tEnter 0 to go back to main menu\n\tEnter 1 to move to previous page\n\tEnter 2 to move to next page\n\tChoice?  ";
             cin >> choice3;
             while (choice3 < 0 || choice3>2) {
-                cout << "\nInvalid choice, try again!" << endl;
-                cout << "Enter 0 to go back to main menu\nEnter 1 to move to previous page\nEnter 2 to move to next page\nChoice?  ";
+                SetConsoleTextAttribute(color, 4);
+                cout << "\n\tInvalid choice, try again!" << endl;
+                SetConsoleTextAttribute(color, 7);
+                cout << "\tEnter 0 to go back to main menu\n\tEnter 1 to move to previous page\n\tEnter 2 to move to next page\n\tChoice?  ";
                 cin >> choice3;
             }
             if (choice3 == 0) {
@@ -1047,7 +1118,10 @@ public:
             }
             else if (choice3 == 1) {
                 if ((i - 1) < 0) {
-                    cout << "\nThere is no previous record" << endl;
+                    SetConsoleTextAttribute(color, 4);
+                    cout << "\n\tThere is no previous record" << endl;
+                    SetConsoleTextAttribute(color, 7);
+                    system("pause");
                 }
                 else {
                     --i;
@@ -1055,14 +1129,17 @@ public:
             }
             else {
                 if ((i + 1) > findLength() - 1) {
-                    cout << "\nThere is no next record" << endl;
+                    SetConsoleTextAttribute(color, 4);
+                    cout << "\n\tThere is no next record" << endl;
+                    SetConsoleTextAttribute(color, 7);
+                    system("pause");
                 }
                 else {
                     ++i;
                 }
             }
         }
-        cout << "|______________________END OF RESULT________________________|" << endl;
+        //cout << "|______________________END OF RESULT________________________|" << endl;
     }
 
     //sort by frontname
