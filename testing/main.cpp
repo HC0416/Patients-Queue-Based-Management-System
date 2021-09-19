@@ -156,17 +156,19 @@ public:
         bool disab_option;
 
         id = idGenerator();
-        cout << "---->New Patient ID : " << id << "<----" << endl << endl;
+        cout << "\n\t---->New Patient ID : " << id << "<----" << endl << endl;
         cin.ignore();
-        cout << "Patient first name : ";
+        cout << "\tPatient first name : ";
         getline(cin, first_name);
-        cout << "Patient last name : ";
+        cout << "\tPatient last name : ";
         getline(cin, last_name);
-        cout << "What is the gender? 1. Male \t 2. Female : ";
+        cout << "\tWhat is the gender? 1. Male \t 2. Female : ";
         cin >> choice1;
         while (!(choice1 > 0) && (choice1 < 3)) {
-            cout << "Invalid answer, please try again" << endl;
-            cout << "What is the gender? 1. Male \t 2. Female : ";
+            SetConsoleTextAttribute(color, 4);
+            cout << "\tInvalid answer, please try again" << endl;
+            SetConsoleTextAttribute(color, 7);
+            cout << "\tWhat is the gender? 1. Male \t 2. Female : ";
             cin >> choice1;
         }
         if (choice1 == 1) {
@@ -176,32 +178,34 @@ public:
             gender = "female";
         }
 
-        cout << "Age : ";
+        cout << "\tAge : ";
         cin >> age;
         cin.ignore();
-        cout << "Phone number : ";
+        cout << "\tPhone number : ";
         getline(cin, phone);
-        cout << "Address Number : ";
+        cout << "\tAddress Number : ";
         getline(cin, addressNo);
-        cout << "Buidling or Street Name : ";
+        cout << "\tBuidling or Street Name : ";
         getline(cin, buildingStreet);
-        cout << "Zip Number : ";
+        cout << "\tZip Number : ";
         cin >> zip;
         cin.ignore();
-        cout << "City : ";
+        cout << "\tCity : ";
         getline(cin, city);
-        cout << "State : ";
+        cout << "\tState : ";
         getline(cin, state);
-        cout << "Country : ";
+        cout << "\tCountry : ";
         getline(cin, country);
-        cout << "Current visit date and time (please follow this format : yyyy MM dd HH mm) : ";
+        cout << "\tCurrent visit date and time (please follow this format : yyyy MM dd HH mm) : ";
         cin >> year >> month >> date >> hour >> minute;
-        cout << "Is the patient disable ? 1. Yes \t 2. No : ";
+        cout << "\tIs the patient disable ? 1. Yes \t 2. No : ";
         cin >> choice2;
 
         while (!((choice2 > 0) && (choice2 < 3))) {
-            cout << "Invalid answer, please try again" << endl;
-            cout << "Is the patient disable ? 1. Yes \t 2. No : ";
+            SetConsoleTextAttribute(color, 4);
+            cout << "\tInvalid answer, please try again" << endl;
+            SetConsoleTextAttribute(color, 7);
+            cout << "\tIs the patient disable ? 1. Yes \t 2. No : ";
             cin >> choice2;
         }
         if (choice2 == 1) {
