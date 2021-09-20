@@ -614,60 +614,78 @@ public:
      
         wCurrent = wHead;
 
-        id = wCurrent->info.id;
-        first_name = wCurrent->info.first_name;
-        last_name = wCurrent->info.last_name;
-        age = wCurrent->info.age;
-        gender = wCurrent->info.gender;
-        phone = wCurrent->info.phone;
-        addressNo = wCurrent->info.pAddress.addressNo;
-        buildingStreet = wCurrent->info.pAddress.buildingStreet;
-        city = wCurrent->info.pAddress.city;
-        zip = wCurrent->info.pAddress.zip;
-        state = wCurrent->info.pAddress.state;
-        country = wCurrent->info.pAddress.country;
-        disab_option = wCurrent->disab_option;
-        date = wCurrent->dateTime.date;
-        year = wCurrent->dateTime.year;
-        month = wCurrent->dateTime.month;
-        hour = wCurrent->dateTime.hour;
-        minute = wCurrent->dateTime.minute;
 
-        cout << endl << endl;
-        cout << "The next patient to call is";
-        cout << "\n Patient ID : " << wCurrent->info.id <<
-            "\n Name : " << wCurrent->info.first_name + " " +
-            wCurrent->info.last_name << "\n Age : " << wCurrent->info.age
-            << "\n Gender : " << wCurrent->info.gender << "\n Phone No : " <<
-            wCurrent->info.phone << "\n Address : " << wCurrent->info.pAddress.addressNo +
-            ", " + wCurrent->info.pAddress.buildingStreet + ", " + wCurrent->info.pAddress.city +
-            ", " + to_string(wCurrent->info.pAddress.zip) + ", " + wCurrent->info.pAddress.state + ", " +
-            wCurrent->info.pAddress.country << "\n Disability : " << wCurrent->disab_option <<
-            "\n Current date time : " << wCurrent->dateTime.year << "-" << wCurrent->dateTime.month <<
-            "-" << wCurrent->dateTime.date << " " << wCurrent->dateTime.hour << ":" << wCurrent->dateTime.minute <<
-            endl << endl << "|------------------------------|" << endl;
-        cout << "\nCalling this patient";
-        Node* n = wHead;
-        //copy the data of the next node to head
-        wHead = wHead->next; 
-        //createNode
-        Node* nodeptr = createNode(id, first_name, last_name, age, gender, phone, addressNo, buildingStreet, zip, city, state, country, date, month, year, hour, minute, disab_option);
-        // Node* n store into the history list
-        transferNode(nodeptr);
-        free(n); //free memory
-        cout << "\nThe next patient to call is"; //The next head data
-        cout << "\n Patient ID : " << wHead->info.id <<
-            "\n Name : " << wHead->info.first_name + " " +
-            wHead->info.last_name << "\n Age : " << wHead->info.age
-            << "\n Gender : " << wHead->info.gender << "\n Phone No : " <<
-            wHead->info.phone << "\n Address : " << wHead->info.pAddress.addressNo +
-            ", " + wHead->info.pAddress.buildingStreet + ", " + wHead->info.pAddress.city +
-            ", " + to_string(wHead->info.pAddress.zip) + ", " + wHead->info.pAddress.state + ", " +
-            wHead->info.pAddress.country << "\n Disability : " << wHead->disab_option <<
-            "\n Current date time : " << wHead->dateTime.year << "-" << wHead->dateTime.month <<
-            "-" << wHead->dateTime.date << " " << wHead->dateTime.hour << ":" << wHead->dateTime.minute <<
-            endl << endl << "|------------------------------|" << endl;
-    }
+        if (wCurrent == NULL)
+        {
+            SetConsoleTextAttribute(color, 4);
+            cout << "\nThere is no patient left!\n";
+            SetConsoleTextAttribute(color, 7);
+        }
+        else {
+            id = wCurrent->info.id;
+            first_name = wCurrent->info.first_name;
+            last_name = wCurrent->info.last_name;
+            age = wCurrent->info.age;
+            gender = wCurrent->info.gender;
+            phone = wCurrent->info.phone;
+            addressNo = wCurrent->info.pAddress.addressNo;
+            buildingStreet = wCurrent->info.pAddress.buildingStreet;
+            city = wCurrent->info.pAddress.city;
+            zip = wCurrent->info.pAddress.zip;
+            state = wCurrent->info.pAddress.state;
+            country = wCurrent->info.pAddress.country;
+            disab_option = wCurrent->disab_option;
+            date = wCurrent->dateTime.date;
+            year = wCurrent->dateTime.year;
+            month = wCurrent->dateTime.month;
+            hour = wCurrent->dateTime.hour;
+            minute = wCurrent->dateTime.minute;
+            cout << endl << endl;
+            cout << "The next patient to call is";
+            cout << "\n Patient ID : " << wCurrent->info.id <<
+                "\n Name : " << wCurrent->info.first_name + " " +
+                wCurrent->info.last_name << "\n Age : " << wCurrent->info.age
+                << "\n Gender : " << wCurrent->info.gender << "\n Phone No : " <<
+                wCurrent->info.phone << "\n Address : " << wCurrent->info.pAddress.addressNo +
+                ", " + wCurrent->info.pAddress.buildingStreet + ", " + wCurrent->info.pAddress.city +
+                ", " + to_string(wCurrent->info.pAddress.zip) + ", " + wCurrent->info.pAddress.state + ", " +
+                wCurrent->info.pAddress.country << "\n Disability : " << wCurrent->disab_option <<
+                "\n Current date time : " << wCurrent->dateTime.year << "-" << wCurrent->dateTime.month <<
+                "-" << wCurrent->dateTime.date << " " << wCurrent->dateTime.hour << ":" << wCurrent->dateTime.minute <<
+                endl << endl << "|------------------------------|" << endl;
+            cout << "\nCalling this patient";
+            //createNode
+            Node* nodeptr = createNode(id, first_name, last_name, age, gender, phone, addressNo, buildingStreet, zip, city, state, country, date, month, year, hour, minute, disab_option);
+            // Node* n store into the history list
+            transferNode(nodeptr);
+            Node* n = wHead;
+            //copy the data of the next node to head
+            wHead = wHead->next;
+            free(n); //free memory
+            if (wHead == NULL)
+            {
+                SetConsoleTextAttribute(color, 4);
+                cout << "\n\nThere is no next patient!\n";
+                SetConsoleTextAttribute(color, 7);
+            }
+            else {
+                cout << "\nThe next patient to call is"; //The next head data
+                cout << "\n Patient ID : " << wHead->info.id <<
+                    "\n Name : " << wHead->info.first_name + " " +
+                    wHead->info.last_name << "\n Age : " << wHead->info.age
+                    << "\n Gender : " << wHead->info.gender << "\n Phone No : " <<
+                    wHead->info.phone << "\n Address : " << wHead->info.pAddress.addressNo +
+                    ", " + wHead->info.pAddress.buildingStreet + ", " + wHead->info.pAddress.city +
+                    ", " + to_string(wHead->info.pAddress.zip) + ", " + wHead->info.pAddress.state + ", " +
+                    wHead->info.pAddress.country << "\n Disability : " << wHead->disab_option <<
+                    "\n Current date time : " << wHead->dateTime.year << "-" << wHead->dateTime.month <<
+                    "-" << wHead->dateTime.date << " " << wHead->dateTime.hour << ":" << wHead->dateTime.minute <<
+                    endl << endl << "|------------------------------|" << endl;
+            }
+        }
+
+        }
+
 };
 
 class doctors {
