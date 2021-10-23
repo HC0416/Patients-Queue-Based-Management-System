@@ -1091,6 +1091,24 @@ public:
         }
     }
 
+    void selectionSickDescSort(Node* arrPtr, int n) {
+        int i, j;
+
+        for (i = 0; i < n - 1; i++) {
+            string min = (arrPtr + (i))-> sickness_descp;
+            int min_index = i;
+            for (j = i + 1; j < n; j++) {
+                string max = (arrPtr + (j))->sickness_descp;
+                if (max > min) {
+                    min_index = j;
+                    min = max;
+
+                }
+            }
+            swap(*(arrPtr + (i)), *(arrPtr + (min_index)));
+        }
+    }
+
     //display array
     void displayArray(Node* arrPtr, int length) {
         int i = 0, choice3;
@@ -1112,6 +1130,9 @@ public:
             cout << "\n\tDisability        : " << (arrPtr + i)->disab_option;
             cout << "\n\tCurrent Date Time : " << (arrPtr + i)->dateTime.year << "-" << (arrPtr + i)->dateTime.month <<
                 "-" << (arrPtr + i)->dateTime.date << " " << (arrPtr + i)->dateTime.hour << ":" << (arrPtr + i)->dateTime.minute;
+            cout << "\n\tSickness Description : " << (arrPtr + i)->sickness_descp;
+            cout << "\n\tMedicine Information : " << (arrPtr + i)->med_info; 
+            cout << "\n\tDoctor Name          : " << (arrPtr + i)->doct_name;
             cout << "\n\t--------------------------------------------------------------\n\n";
 
             //cout << i + 1 << ". Patient ID : " << (arrPtr + i)->info.id <<
@@ -1180,6 +1201,13 @@ public:
         displayArray(nodeArrPtr, length);
     }
 
+    void sortBySickDesc() {
+        int length = findLength();
+        Node* nodeArrPtr = convertToArray();
+        selectionSickDescSort(nodeArrPtr, length);
+        displayArray(nodeArrPtr, length);
+    }
+
     //2.3 sort menu 
     void sortMenu() {
         int choice;
@@ -1189,7 +1217,8 @@ public:
             cout << "\n\t======= PATIENT'S INFO ========";
             cout << "\n\t1. First Name";
             cout << "\n\t2. Last Name";
-            cout << "\n\tWhat would you like to sort by? (1,2): ";
+            cout << "\n\t3. Sickness Description";
+            cout << "\n\tWhat would you like to sort by? (1,2,3): ";
             cin >> choice;
 
             if (choice == 1)
@@ -1200,6 +1229,10 @@ public:
             {
                 sortByLname();
             }
+            else if (choice == 3)
+            {
+                sortBySickDesc();
+            }
             else
             {
                 SetConsoleTextAttribute(color, 4);
@@ -1208,7 +1241,7 @@ public:
                 system("pause");
             }
 
-        } while (choice != 1 && choice != 2);
+        } while (choice != 1 && choice != 2 && choice != 3);
     }
     //2.4 Search patient history list using sickness description
     void searchPatientbySickDesc() {
