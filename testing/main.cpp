@@ -108,6 +108,24 @@ struct Node {
 
 class nurses {
 public:
+
+    void registration() { //registering new patient 
+        int choice;
+        cout << "Press 1 to register new patients" << endl << "Press 2 to register esxisting patients" << endl;
+        cin >> choice;
+        if (choice == 1) {
+            addNewPatient();
+        }
+        else if (choice == 2) {
+            addExistingPatient();
+        }
+        else {
+            cout << "Invalid option, please try again";
+            registration();
+        }
+        return;
+    }
+
     string idMaker(int length) {//generate patient id automatically
         string id;
         if (length < 10) {
@@ -149,7 +167,102 @@ public:
         return id;
     }
 
+    bool dateTimeValidation(int year, int month, int date, int hour, int minute) {
+        bool invalid = true, leap_year = false;
+        if (year % 4 == 0) {
+            if (year % 100 == 0) {
+                if (year % 400 == 0)
+                    leap_year = true;
+            }
+            else
+                leap_year = true;
+        }
+        if (month < 1 || month>12) {
+            cout << "Invalid month, please try again"<<endl;
+            return invalid;
+        }
+        if (hour < 0 || hour > 23) {
+            cout << "Invalid hour, please try again"<<endl;
+            return invalid;
+        }
+        if (minute < 0 || minute > 59) {
+            cout << "Invalid minute, please try again"<<endl;
+            return invalid;
+        }
+        if (month == 2 && leap_year) {
+            if (date < 1 || date>29) {
+                cout << "Invalid date, please try again"<<endl;
+                return invalid;
+            }
+        }
+        if (month == 2 && !leap_year) {
+            if (date < 1 || date >28) {
+                cout << "Invalid date, please try again"<<endl;
+                return invalid;
+            }
+        }
+        if (month == 4 || month == 6 || month == 9 || month == 11) {
+            if (date < 1 || date>30) {
+                cout << "Invalid date, please try again"<<endl;
+                return invalid;
+            }
+        }
+        if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+            if (date < 1 || date > 31) {
+                cout << "Invalid date, please try again"<<endl;
+                return invalid;
+            }
+        }
+        invalid = false;
+        return invalid;
+    }
 
+    void addExistingPatient() {
+        string id;
+        int year, month, date, hour, minute;
+        bool disab_option;
+        Node* nodeptr = new Node();
+        cin.ignore();
+        cout << "Please enter existing patient ID : ";
+        getline(cin, id);
+        hCurrent = hHead;
+        while (hCurrent != NULL) {
+            if (hCurrent->info.id == id) {
+                nodeptr->info = hCurrent->info;
+                cout << "Current visit date and time (please follow this format : yyyy MM dd HH mm) : ";
+                cin >> year >> month >> date >> hour >> minute;
+                while (dateTimeValidation(year, month, date, hour, minute)) {
+                    cout << "Current visit date and time (please follow this format : yyyy MM dd HH mm) : ";
+                    cin >> year >> month >> date >> hour >> minute;
+                }
+                cout << "Is the patient disable ? 1. Yes \t 2. No : ";
+                int choice1;
+                cin >> choice1;
+                while (!((choice1 > 0) && (choice1 < 3))) {
+                    cout << "Invalid answer, please try again" << endl;
+                    cout << "Is the patient disable ? 1. Yes \t 2. No : ";
+                    cin >> choice1;
+                }
+                if (choice1 == 1) {
+                    disab_option = true;
+                }
+                else {
+                    disab_option = false;
+                }
+                nodeptr->dateTime.year = year;
+                nodeptr->dateTime.month = month;
+                nodeptr->dateTime.date = date;
+                nodeptr->dateTime.hour = hour;
+                nodeptr->dateTime.minute = minute;
+                nodeptr->disab_option = disab_option;
+                insertNode(nodeptr);
+                return;
+            }
+            hCurrent = hCurrent->next;
+        }
+        cout << "ID not found, please enter a valid ID" << endl;
+        return;
+    }
     void addNewPatient() { //for question 1.1 adding patient to the waiting list (add into menu)
         string id, first_name, last_name, gender, phone, addressNo, buildingStreet, city, state, country;
         int age, zip, date, month, year, hour, minute, choice1, choice2;
@@ -174,7 +287,7 @@ public:
         if (choice1 == 1) {
             gender = "male";
         }
-        else{
+        else {
             gender = "female";
         }
 
@@ -198,6 +311,10 @@ public:
         getline(cin, country);
         cout << "\tCurrent visit date and time (please follow this format : yyyy MM dd HH mm) : ";
         cin >> year >> month >> date >> hour >> minute;
+        while (dateTimeValidation(year, month, date, hour, minute)) {
+            cout << "Current visit date and time (please follow this format : yyyy MM dd HH mm) : ";
+            cin >> year >> month >> date >> hour >> minute;
+        }
         cout << "\tIs the patient disable ? 1. Yes \t 2. No : ";
         cin >> choice2;
 
@@ -1357,12 +1474,11 @@ public:
         cout << "\t\tWELCOME TO NURSE MENU PAGE\n";
         cout << "\t--------------------------------------------------\n\n";
         cout << "\t1. Add a new patient on the waiting list";
-        cout << "\n\t2. Change the patient order according to the priority on the waiting list";
-        cout << "\n\t3. View all patients on the original waiting list";
-        cout << "\n\t4. Calling the patient to be treated";
-        cout << "\n\t5. Search patient from the waiting list ";
-        cout << "\n\t6. Sort the waiting list by patient's current visit time";
-        cout << "\n\t7. Log Out";
+        cout << "\n\t2. View all patients on the original waiting list";
+        cout << "\n\t3. Calling the patient to be treated";
+        cout << "\n\t4. Search patient from the waiting list ";
+        cout << "\n\t5. Sort the waiting list by patient's current visit time";
+        cout << "\n\t6. Log Out";
         cout << endl;
     }
 
@@ -1396,39 +1512,35 @@ void nurseMenuPage()
 
         case 1:
             system("cls");
-            nurse.addNewPatient();
+            nurse.registration();
             system("pause");
             break;
 
-        case 2:
-            system("cls");
-            /*nurse.insertPriority(Node * wptr);*/
-            break;
 
-        case 3:
+        case 2:
             system("cls");
             nurse.displayLinkedList();
             system("pause");
             break;
-        case 4:
+        case 3:
             system("cls");
             nurse.calledpatient();
             system("pause");
             break;
 
-        case 5:
+        case 4:
 
             nurse.searchPatient();
             system("pause");
             break;
 
-        case 6:
+        case 5:
             system("cls");
             nurse.sortByTime();
             system("pause");
             break;
 
-        case 7:
+        case 6:
             system("cls");
             cout << "\n\tLogging Out...";
             Sleep(1000);
@@ -1441,7 +1553,7 @@ void nurseMenuPage()
             system("pause");
         }
 
-    } while (selection != 7);
+    } while (selection != 6);
 
 
 }
