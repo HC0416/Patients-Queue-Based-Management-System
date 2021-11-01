@@ -120,7 +120,7 @@ public:
             addExistingPatient();
         }
         else {
-            cout << "Invalid option, please try again";
+            cout << "Invalid option, please try again"<<endl;
             registration();
         }
         return;
