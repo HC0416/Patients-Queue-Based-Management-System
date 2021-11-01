@@ -178,38 +178,38 @@ public:
                 leap_year = true;
         }
         if (month < 1 || month>12) {
-            cout << "Invalid month, please try again"<<endl;
+            cout << "Invalid month, please try again" << endl;
             return invalid;
         }
         if (hour < 0 || hour > 23) {
-            cout << "Invalid hour, please try again"<<endl;
+            cout << "Invalid hour, please try again" << endl;
             return invalid;
         }
         if (minute < 0 || minute > 59) {
-            cout << "Invalid minute, please try again"<<endl;
+            cout << "Invalid minute, please try again" << endl;
             return invalid;
         }
         if (month == 2 && leap_year) {
             if (date < 1 || date>29) {
-                cout << "Invalid date, please try again"<<endl;
+                cout << "Invalid date, please try again" << endl;
                 return invalid;
             }
         }
         if (month == 2 && !leap_year) {
             if (date < 1 || date >28) {
-                cout << "Invalid date, please try again"<<endl;
+                cout << "Invalid date, please try again" << endl;
                 return invalid;
             }
         }
         if (month == 4 || month == 6 || month == 9 || month == 11) {
             if (date < 1 || date>30) {
-                cout << "Invalid date, please try again"<<endl;
+                cout << "Invalid date, please try again" << endl;
                 return invalid;
             }
         }
         if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
             if (date < 1 || date > 31) {
-                cout << "Invalid date, please try again"<<endl;
+                cout << "Invalid date, please try again" << endl;
                 return invalid;
             }
         }
@@ -728,7 +728,7 @@ public:
         string id, first_name, last_name, gender, phone, addressNo, buildingStreet, city, state, country;
         int age, zip, date, month, year, hour, minute;
         bool disab_option;
-     
+
         wCurrent = wHead;
 
 
@@ -801,7 +801,7 @@ public:
             }
         }
 
-        }
+    }
 
 };
 
@@ -1171,7 +1171,7 @@ public:
         a = b;
         b = temp;
     }
-   
+
     void selectionFSort(Node* arrPtr, int n) {
         int i, j;
 
@@ -1183,7 +1183,7 @@ public:
                 if (max > min) {
                     min_index = j;
                     min = max;
-                    
+
                 }
             }
             swap(*(arrPtr + (i)), *(arrPtr + (min_index)));
@@ -1212,7 +1212,7 @@ public:
         int i, j;
 
         for (i = 0; i < n - 1; i++) {
-            string min = (arrPtr + (i))-> sickness_descp;
+            string min = (arrPtr + (i))->sickness_descp;
             int min_index = i;
             for (j = i + 1; j < n; j++) {
                 string max = (arrPtr + (j))->sickness_descp;
@@ -1248,7 +1248,7 @@ public:
             cout << "\n\tCurrent Date Time : " << (arrPtr + i)->dateTime.year << "-" << (arrPtr + i)->dateTime.month <<
                 "-" << (arrPtr + i)->dateTime.date << " " << (arrPtr + i)->dateTime.hour << ":" << (arrPtr + i)->dateTime.minute;
             cout << "\n\tSickness Description : " << (arrPtr + i)->sickness_descp;
-            cout << "\n\tMedicine Information : " << (arrPtr + i)->med_info; 
+            cout << "\n\tMedicine Information : " << (arrPtr + i)->med_info;
             cout << "\n\tDoctor Name          : " << (arrPtr + i)->doct_name;
             cout << "\n\t--------------------------------------------------------------\n\n";
 
@@ -1496,251 +1496,251 @@ public:
     }
 };
 
-void nurseMenuPage()
+class menuPage
 {
-    Design design;
-    nurses nurse;
+public:
+    void mainMenu()
+    {
+        Design design;
+        int selection;
 
-    int selection;
-
-    do {
-        design.nurseMenu();
-        cout << "\n\tPlease select one of the option: ";
-        cin >> selection;
-
-        switch (selection) {
-
-        case 1:
-            system("cls");
-            nurse.registration();
-            system("pause");
-            break;
-
-
-        case 2:
-            system("cls");
-            nurse.displayLinkedList();
-            system("pause");
-            break;
-        case 3:
-            system("cls");
-            nurse.calledpatient();
-            system("pause");
-            break;
-
-        case 4:
-
-            nurse.searchPatient();
-            system("pause");
-            break;
-
-        case 5:
-            system("cls");
-            nurse.sortByTime();
-            system("pause");
-            break;
-
-        case 6:
-            system("cls");
-            cout << "\n\tLogging Out...";
-            Sleep(1000);
-            break;
-
-        default:
-            SetConsoleTextAttribute(color, 4);
-            cout << "\n\tWrong Input! Try Again!\n";
-            SetConsoleTextAttribute(color, 7);
-            system("pause");
-        }
-
-    } while (selection != 6);
-
-
-}
-
-void doctorMenuPage()
-{
-    nurses nurse;
-    doctors doctor;
-    Design design;
-    int selection;
-
-    do {
-        design.doctorMenu();
-        cout << "\n\tPlease select one of the option: ";
-        cin >> selection;
-
-        switch (selection)
+        do
         {
-        case 1:
-            system("cls");
-            nurse.displayLinkedList();
-            system("pause");
-            break;
-        case 2:
-            system("cls");
-            doctor.searchAndModify();
-            system("pause");
-            break;
-        case 3:
-            system("cls");
-            doctor.sortMenu();
-            system("pause");
-            break;
-        case 4:
-            system("cls");
-            doctor.searchPatientHis();
-            system("pause");
-            break;
-        case 5:
-            system("cls");
-            cout << "\n\tLogging Out...";
-            Sleep(1000);
-            break;
-        default:
-            SetConsoleTextAttribute(color, 4);
-            cout << "\n\tWrong Input! Please Try Again!\n";
-            SetConsoleTextAttribute(color, 7);
-            system("pause");
-        }
+            design.mainMenu();
+            cout << "\n\tPlease select one of the options (1,2): ";
+            cin >> selection;
 
-    } while (selection != 5);
+            if (selection == 1)
+            {
+                login();
+            }
+            else if (selection == 2)
+            {
+                cout << "\n\tBye!";
+            }
+            else {
+                SetConsoleTextAttribute(color, 4);
+                cout << "\n\tWrong Input! Please Try Again!\n";
+                SetConsoleTextAttribute(color, 7);
+                system("pause");
+            }
+        } while (selection != 2);
 
+    }
 
-}
+    void login()
+    {
+        string id;
+        const char* nursePassword = "nurse999", * doctorPassword = "doctor999", * nurseID = "N007", * doctorID = "D007";
+        int index = 0;
+        bool access;
+        char password[100] = "", c;
 
-void login()
-{
-    string id;
-    const char* nursePassword = "nurse999", * doctorPassword = "doctor999", * nurseID = "N007", * doctorID = "D007";
-    int index = 0;
-    bool access;
-    char password[100] = "", c;
+        cout << "\n\t--------------------------------------------\n";
 
-    cout << "\n\t--------------------------------------------\n";
+        do {
+            cout << "\n\tPlease Enter Your ID: ";
+            cin >> id;
 
-    do {
-        cout << "\n\tPlease Enter Your ID: ";
-        cin >> id;
+            cout << "\n\tPlease Enter Your Password: ";
 
-        cout << "\n\tPlease Enter Your Password: ";
+            //using ASCII code for asterik
+            //13 is a ASCII value of ENTER character
+            while ((c = _getch()) != 13) {
+                if (index < 0)
+                    index = 0;
 
-        //using ASCII code for asterik
-        //13 is a ASCII value of ENTER character
-        while ((c = _getch()) != 13) {
-            if (index < 0)
-                index = 0;
+                //8 is ASCII value of BACKSPACE character 
+                if (c == 8) {
+                    if (index > 0)
+                    {
+                        _putch('\b');
+                        _putch(' ');
+                        _putch(NULL);
+                        _putch('\b');
+                        index--;
+                        continue;
+                    }
 
-            //8 is ASCII value of BACKSPACE character 
-            if (c == 8) {
-                if (index > 0)
+                }
+                password[index++] = c;
+                _putch('*');
+            }
+            password[index] = '\0';
+
+            if (id == nurseID)
+            {
+                if (!strcmp(password, nursePassword))
                 {
-                    _putch('\b');
-                    _putch(' ');
-                    _putch(NULL);
-                    _putch('\b');
-                    index--;
-                    continue;
+                    access = true;
+                    system("cls");
+                    cout << "\n\tLogging In...";
+                    Sleep(1000);
+                    nurseMenuPage();
+                }
+                else
+                {
+                    access = false;
+                    index = _putch(NULL);
+                    SetConsoleTextAttribute(color, 4);
+                    cout << "\n\tID or Password are Not Correct! Please Try Again\n\n";
+                    SetConsoleTextAttribute(color, 7);
+                    system("pause");
+                    cout << endl;
                 }
 
             }
-            password[index++] = c;
-            _putch('*');
-        }
-        password[index] = '\0';
 
-        if (id == nurseID)
-        {
-            if (!strcmp(password, nursePassword))
+            else if (id == doctorID)
             {
-                access = true;
-                system("cls");
-                cout << "\n\tLogging In...";
-                Sleep(1000);
-                nurseMenuPage();
+                if (!strcmp(password, doctorPassword))
+                {
+                    access = true;
+                    system("cls");
+                    cout << "\n\tLogging In...";
+                    Sleep(1000);
+                    doctorMenuPage();
+
+                }
+                else {
+                    access = false;
+                    index = _putch(NULL);
+                    SetConsoleTextAttribute(color, 4);
+                    cout << "\n\tID or Password are Not Correct! Please Try Again\n\n";
+                    SetConsoleTextAttribute(color, 7);
+                    system("pause");
+                    cout << endl;
+                }
+
             }
             else
             {
                 access = false;
                 index = _putch(NULL);
                 SetConsoleTextAttribute(color, 4);
-                cout << "\n\tID or Password are Not Correct! Please Try Again\n\n";
+                cout << "\n\tID is Not Correct! Please Try Again\n\n";
                 SetConsoleTextAttribute(color, 7);
                 system("pause");
                 cout << endl;
             }
 
-        }
+        } while (access == false);
+    }
 
-        else if (id == doctorID)
-        {
-            if (!strcmp(password, doctorPassword))
-            {
-                access = true;
-                system("cls");
-                cout << "\n\tLogging In...";
-                Sleep(1000);
-                doctorMenuPage();
-
-            }
-            else {
-                access = false;
-                index = _putch(NULL);
-                SetConsoleTextAttribute(color, 4);
-                cout << "\n\tID or Password are Not Correct! Please Try Again\n\n";
-                SetConsoleTextAttribute(color, 7);
-                system("pause");
-                cout << endl;
-            }
-
-        }
-        else
-        {
-            access = false;
-            index = _putch(NULL);
-            SetConsoleTextAttribute(color, 4);
-            cout << "\n\tID is Not Correct! Please Try Again\n\n";
-            SetConsoleTextAttribute(color, 7);
-            system("pause");
-            cout << endl;
-        }
-
-    } while (access == false);
-
-}
-
-void mainMenu()
-{
-    Design design;
-    int selection;
-
-    do
+    void nurseMenuPage()
     {
-        design.mainMenu();
-        cout << "\n\tPlease select one of the options (1,2): ";
-        cin >> selection;
+        Design design;
+        nurses nurse;
 
-        if (selection == 1)
-        {
-            login();
-        }
-        else if (selection == 2)
-        {
-            cout << "\n\tBye!";
-        }
-        else {
-            SetConsoleTextAttribute(color, 4);
-            cout << "\n\tWrong Input! Please Try Again!\n";
-            SetConsoleTextAttribute(color, 7);
-            system("pause");
-        }
-    } while (selection != 2);
+        int selection;
 
-}
+        do {
+            design.nurseMenu();
+            cout << "\n\tPlease select one of the option: ";
+            cin >> selection;
+
+            switch (selection) {
+
+            case 1:
+                system("cls");
+                nurse.registration();
+                system("pause");
+                break;
+
+
+            case 2:
+                system("cls");
+                nurse.displayLinkedList();
+                system("pause");
+                break;
+            case 3:
+                system("cls");
+                nurse.calledpatient();
+                system("pause");
+                break;
+
+            case 4:
+
+                nurse.searchPatient();
+                system("pause");
+                break;
+
+            case 5:
+                system("cls");
+                nurse.sortByTime();
+                system("pause");
+                break;
+
+            case 6:
+                system("cls");
+                cout << "\n\tLogging Out...";
+                Sleep(1000);
+                break;
+
+            default:
+                SetConsoleTextAttribute(color, 4);
+                cout << "\n\tWrong Input! Try Again!\n";
+                SetConsoleTextAttribute(color, 7);
+                system("pause");
+            }
+
+        } while (selection != 6);
+    }
+
+    void doctorMenuPage()
+    {
+        nurses nurse;
+        doctors doctor;
+        Design design;
+        int selection;
+
+        do {
+            design.doctorMenu();
+            cout << "\n\tPlease select one of the option: ";
+            cin >> selection;
+
+            switch (selection)
+            {
+            case 1:
+                system("cls");
+                nurse.displayLinkedList();
+                system("pause");
+                break;
+            case 2:
+                system("cls");
+                doctor.searchAndModify();
+                system("pause");
+                break;
+            case 3:
+                system("cls");
+                doctor.sortMenu();
+                system("pause");
+                break;
+            case 4:
+                system("cls");
+                doctor.searchPatientHis();
+                system("pause");
+                break;
+            case 5:
+                system("cls");
+                cout << "\n\tLogging Out...";
+                Sleep(1000);
+                break;
+            default:
+                SetConsoleTextAttribute(color, 4);
+                cout << "\n\tWrong Input! Please Try Again!\n";
+                SetConsoleTextAttribute(color, 7);
+                system("pause");
+            }
+
+        } while (selection != 5);
+    }
+};
 
 int main() {
     nurses* nurse = NULL;
     doctors* doctor = NULL;
+    menuPage menupage;
     Node* wNode = NULL, * hNode = NULL;
     wNode = nurse->createNode("P0006", "Eren", "Yeager", 23, "male", "0124353214", "No. 54", "Street A", 13412, "City A", "State A", "A", 22, 8, 2021, 14, 45, true);
     nurse->insertNode(wNode);
@@ -1764,7 +1764,8 @@ int main() {
     doctor->insertIntoHList(hNode);
     hNode = doctor->createHnode("P0001", "Levi", "Arkerman", 33, "male", "0124353214", "No. 59", "Street A", 13412, "City A", "State A", "A", 21, 8, 2021, 14, 45, true, "Allergies", "Doctor Chong", "Allergy shots");
     doctor->insertIntoHList(hNode);
-    mainMenu();
+
+    menupage.mainMenu();
     return 0;
 }
 
