@@ -277,7 +277,7 @@ public:
         getline(cin, last_name);
         cout << "\tWhat is the gender? 1. Male \t 2. Female : ";
         cin >> choice1;
-        while (!((choice1 > 0) && (choice1 < 3))) {
+        while (!((choice1 > 0) && (choice1 < 3))) { 
             SetConsoleTextAttribute(color, 4);
             cout << "\tInvalid answer, please try again" << endl;
             SetConsoleTextAttribute(color, 7);
@@ -1456,57 +1456,22 @@ public:
     }
 };
 
-class Design {
-public:
-    void mainMenu() {
-        system("cls");
-        cout << "\n\t--------------------------------------------------\n";
-        cout << "\tWELCOME TO PATIENT'S QUEUE BASED MANAGEMENT SYSTEM\n";
-        cout << "\t--------------------------------------------------\n\n";
-        cout << "\t1. Log In";
-        cout << "\n\t2. Exit";
-        cout << endl;
-    }
-
-    void nurseMenu() {
-        system("cls");
-        cout << "\n\t--------------------------------------------------\n";
-        cout << "\t\tWELCOME TO NURSE MENU PAGE\n";
-        cout << "\t--------------------------------------------------\n\n";
-        cout << "\t1. Add a new patient on the waiting list";
-        cout << "\n\t2. View all patients on the original waiting list";
-        cout << "\n\t3. Calling the patient to be treated";
-        cout << "\n\t4. Search patient from the waiting list ";
-        cout << "\n\t5. Sort the waiting list by patient's current visit time";
-        cout << "\n\t6. Log Out";
-        cout << endl;
-    }
-
-    void doctorMenu() {
-        system("cls");
-        cout << "\n\t--------------------------------------------------\n";
-        cout << "\t\tWELCOME TO DOCTOR MENU PAGE\n";
-        cout << "\t--------------------------------------------------\n\n";
-        cout << "\t1. View all patients on the original waiting list";
-        cout << "\n\t2. Search Specific Patient from the patient's visit history and modify patient records";
-        cout << "\n\t3. Sort and display all records from the patient's visit history list";
-        cout << "\n\t4. Search patients from the patient's visit history list";
-        cout << "\n\t5. Log Out";
-        cout << endl;
-    }
-};
-
 class menuPage
 {
 public:
     void mainMenu()
     {
-        Design design;
         int selection;
 
         do
         {
-            design.mainMenu();
+            system("cls");
+            cout << "\n\t--------------------------------------------------\n";
+            cout << "\tWELCOME TO PATIENT'S QUEUE BASED MANAGEMENT SYSTEM\n";
+            cout << "\t--------------------------------------------------\n\n";
+            cout << "\t1. Log In";
+            cout << "\n\t2. Exit";
+            cout << endl;
             cout << "\n\tPlease select one of the options (1,2): ";
             cin >> selection;
 
@@ -1629,13 +1594,22 @@ public:
 
     void nurseMenuPage()
     {
-        Design design;
         nurses nurse;
 
         int selection;
 
         do {
-            design.nurseMenu();
+            system("cls");
+            cout << "\n\t--------------------------------------------------\n";
+            cout << "\t\tWELCOME TO NURSE MENU PAGE\n";
+            cout << "\t--------------------------------------------------\n\n";
+            cout << "\t1. Add a new patient on the waiting list";
+            cout << "\n\t2. View all patients on the original waiting list";
+            cout << "\n\t3. Calling the patient to be treated";
+            cout << "\n\t4. Search patient from the waiting list ";
+            cout << "\n\t5. Sort the waiting list by patient's current visit time";
+            cout << "\n\t6. Log Out";
+            cout << endl;
             cout << "\n\tPlease select one of the option: ";
             cin >> selection;
 
@@ -1691,11 +1665,19 @@ public:
     {
         nurses nurse;
         doctors doctor;
-        Design design;
         int selection;
 
         do {
-            design.doctorMenu();
+            system("cls");
+            cout << "\n\t--------------------------------------------------\n";
+            cout << "\t\tWELCOME TO DOCTOR MENU PAGE\n";
+            cout << "\t--------------------------------------------------\n\n";
+            cout << "\t1. View all patients on the original waiting list";
+            cout << "\n\t2. Search Specific Patient from the patient's visit history and modify patient records";
+            cout << "\n\t3. Sort and display all records from the patient's visit history list";
+            cout << "\n\t4. Search patients from the patient's visit history list";
+            cout << "\n\t5. Log Out";
+            cout << endl;
             cout << "\n\tPlease select one of the option: ";
             cin >> selection;
 
