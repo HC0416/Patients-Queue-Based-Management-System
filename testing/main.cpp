@@ -120,7 +120,7 @@ public:
             addExistingPatient();
         }
         else {
-            cout << "Invalid option, please try again";
+            cout << "Invalid option, please try again"<<endl;
             registration();
         }
         return;
@@ -605,6 +605,10 @@ public:
 
     //this one for question 1.6, sort patients by visit time, (need to add into the main menu)
     void sortByTime() {
+        while(wHead == NULL){
+            cout << "No record to sort!"<<endl;
+            return;
+        }
         int length = findLength();
         Node* nodeArrPtr = convertToArray();
         quickSort(nodeArrPtr, 0, length - 1);
