@@ -650,7 +650,7 @@ public:
         if (wCurrent == NULL)
         {
             SetConsoleTextAttribute(color, 4);
-            cout << "\n\tPatient ID does not exists!\n";
+            cout << "\n\tPatient's ID does not exists!\n";
             SetConsoleTextAttribute(color, 7);
         }
     }
@@ -1140,7 +1140,7 @@ public:
         if (hCurrent == NULL)
         {
             SetConsoleTextAttribute(color, 4);
-            cout << "\n\tThe Patient ID is not existed!\n";
+            cout << "\n\tPatient ID does not exists!\n";
             SetConsoleTextAttribute(color, 7);
         }
     }
