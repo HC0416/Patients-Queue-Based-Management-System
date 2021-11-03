@@ -646,7 +646,7 @@ public:
         if (wCurrent == NULL)
         {
             SetConsoleTextAttribute(color, 4);
-            cout << "\n\tPatient ID is not existed!\n";
+            cout << "\n\tPatient ID does not exists!\n";
             SetConsoleTextAttribute(color, 7);
         }
     }
@@ -686,7 +686,7 @@ public:
         if (wCurrent == NULL)
         {
             SetConsoleTextAttribute(color, 4);
-            cout << "\n\tPatient's First Name is not existed!\n";
+            cout << "\n\tPatient's First Name does not exists!\n";
             SetConsoleTextAttribute(color, 7);
         }
 
@@ -701,7 +701,7 @@ public:
             system("cls");
             cout << "\n\t1. Patient ID";
             cout << "\n\t2. Patient First Name";
-            cout << "\n\tWhat would you like to search on? (1,2): ";
+            cout << "\n\tWhat would you like to search from? (1,2): ";
             cin >> choice;
 
             if (choice == 1)
@@ -715,7 +715,7 @@ public:
             else
             {
                 SetConsoleTextAttribute(color, 4);
-                cout << "Wrong Input! Please Try Again!";
+                cout << "\n\tWrong Input! Please Try Again!\n";
                 SetConsoleTextAttribute(color, 7);
                 system("pause");
             }
@@ -1750,4 +1750,7 @@ int main() {
     menupage.mainMenu();
     return 0;
 }
+
+
+
 
