@@ -1369,10 +1369,10 @@ public:
     //2.4 Search patient history list using sickness description
     void searchPatientbySickDesc() {
         string sicknessDecs;
-
         hCurrent = hHead;
+        cin.ignore();
         cout << "\n\tPlease enter the patient sickness description: ";
-        cin >> sicknessDecs;
+        getline(cin, sicknessDecs);
         while (hCurrent != NULL) {
             if (hCurrent->sickness_descp == sicknessDecs)
             {
