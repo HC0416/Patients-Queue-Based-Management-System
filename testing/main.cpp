@@ -509,7 +509,7 @@ public:
         b = temp;
     }
 
-    //partitioning the array into smaller array for sorting purpose
+    //partitioning the array into smaller array for sorting purpose (GeeksforGeeks, n.d)
     int arrPatition(Node* arrPtr, int low, int high) {
         long long int pivot = (arrPtr + (high))->dateTime.abbr;
         int i = (low - 1);
@@ -523,8 +523,8 @@ public:
         }
         swap(*(arrPtr + (i + 1)), *(arrPtr + (high)));
         return (i + 1);
-    }
-    //for quick sorting
+    } 
+    //for quick sorting (GeeksforGeeks, n.d)
     void quickSort(Node* arrPtr, int low, int high) {
         if (low < high) {
             int index = arrPatition(arrPtr, low, high);
