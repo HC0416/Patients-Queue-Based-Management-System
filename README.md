@@ -1,8 +1,8 @@
 # Patient Queue Based Management System
 
-## A patient queue based management system had been implemented using *two linked-lists* (waiting list  & patient list) with C++ languages.
+A patient queue based management system had been implemented using **two linked-lists** (waiting list  & patient list) with C++ languages.
 
-### Functionalities of the Program
+## Functionalities of the Program
 
 1. Nurses:
 
